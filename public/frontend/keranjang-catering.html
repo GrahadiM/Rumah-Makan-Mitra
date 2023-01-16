@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Rumah Makan Mitra</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/custom.css" rel="stylesheet" />
+
+    </head>
+    <body id="page-top">
+
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-header text-uppercase fixed-top" id="mainSubnav">
+            <div class="container">
+                <a class="navbar-brand" href="index2.html">Keranjang Katering</a>
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><button class="nav-link py-lg-2 px-0 px-lg-2 rounded" onclick="location.href='keranjang-catering.html'"><i class="fas fa-shopping-cart text-dark"></i></button></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-lg-2 px-0 px-lg-3 rounded" href="akun.html">Nama Pengguna</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="card">
+                    <div class="card-body row">
+                        <h5 class="col-md-10 card-title" style="color: #000;">Pengiriman</h5>
+                        <button data-bs-toggle="modal" data-bs-target="#hari" class="col-md-2 btn btn-sm btn-primary text-decoration-none fw-bold">Order min H-1</button>
+                        <a data-bs-toggle="modal" data-bs-target="#alamat" class="col-md-12 card-text text-decoration-underline" style="color: #000;">Rumah Utama</a>
+                        <p class="col-md-12 card-text" style="color: #000;">Jalan Mawar II No.102, Kebon Jeruk, Jakarta Barat, DKI Jakarta, 11530</p>
+                        <form action="" method="POST">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="note"><i class="far fa-sticky-note"></i></span>
+                                <input type="text" class="form-control" placeholder="Tambahkan catatan pengiriman" aria-label="Note" aria-describedby="note">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Category Section-->
+        <section class="page-section category" id="category">
+            <div class="container">
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #000;">Pesanan</h5>
+                        <div class="card border-0 mb-4">
+                            <div class="row g-0 mt-5">
+                                <div class="col-md-2">
+                                    <img src="assets/img/product/ayam-bakar.jpg" class="img-fluid rounded-start" alt="Thumbnail">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Nasi Ayam Bakar</h5>
+                                        <p class="card-text">Nasi, Sayur Komplit, Sambal Ijo Ayam Bakar</p>
+                                        <div class="row">
+                                            <p class="card-text col-md-10"><b>Rp.24.000</b></p>
+                                            <div class="col-md-2">
+                                                <div class="row btn-group" role="group">
+                                                    <button type="button" class="btn btn-outline-primary border-end-0 col-3" style="height: 36px;"><i class="fas fa-minus"></i></button>
+                                                    <input type="number" class="border border-primary border-start-0 border-end-0 text-center col-6"style="height: 36px;width: 64px;" min="1" value="1">
+                                                    <button type="button" class="btn btn-outline-primary border-start-0 col-3" style="height: 36px;"><i class="fas fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #000;">Ringkasan Pembayaran</h5>
+                        <div class="row">
+                            <div class="col-md-10">Total Harga</div>
+                            <div class="col-md-2">Rp.48.000</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">Biaya Pelayanan</div>
+                            <div class="col-md-2">Rp.4.800</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">Ongkos Kirim</div>
+                            <div class="col-md-2">Rp.0</div>
+                        </div>
+                        <hr style="color:#000;opacity:unset;">
+                        <div class="row fw-bold">
+                            <div class="col-md-10">Total Harga</div>
+                            <div class="col-md-2">Rp.52.800</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row fw-bold mb-5">
+                    <div class="col-md-10">
+                        Total Harga
+                        <h5>Rp.52.800</h5>
+                    </div>
+                    <div class="col-md-2"><a href="" class="btn btn-dark">Pembayaran</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Social Icons-->
+                    <div class="col-lg-2 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Contact Us</h4>
+                        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-instagram"></i></a>
+                        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-whatsapp"></i></a>
+                        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    </div>
+                    <!-- Footer About Text-->
+                    <div class="col-lg-10">
+                        <p class="lead mb-0 mt-5">
+                            <span>Rumah Makan Mitra @ <script language='JavaScript'>document.write(new Date().getFullYear());</script></span>
+                            <br><a href="http://startbootstrap.com" class="text-decoration-none text-dark">Syarat dan Ketentuan</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Copyright Section-->
+        <!-- <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright &copy; Gify Tech 2022</small></div>
+        </div> -->
+
+        <!-- Modal Tanggal -->
+        <div class="modal fade" id="hari" tabindex="-1" aria-labelledby="Jam" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="Jam">Order Min H-1</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="datetime-local" id="datetime-local" class="form-control datetimepicker" min="today_min" value="today_min">
+                        <!-- <span class="validity"></span> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">TUTUP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Alamat -->
+        <div class="modal fade" id="alamat" tabindex="-1" aria-labelledby="alamat" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="alamat">Alamat Tersimpan</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-9 mt-2">
+                                <h5 class="card-title" style="color: #000;">Kantor</h5>
+                                <p class="card-text" style="color: #000;">Jalan Mawar II, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="btn btn-primary" style="margin-top:2.5rem!important;"><i class="fas fa-fw fa-pencil"></i> Pilih</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 mt-2">
+                                <h5 class="card-title" style="color: #000;">Kantor</h5>
+                                <p class="card-text" style="color: #000;">Jalan Mawar II, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="btn btn-primary" style="margin-top:2.5rem!important;"><i class="fas fa-fw fa-pencil"></i> Pilih</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 mt-2">
+                                <h5 class="card-title" style="color: #000;">Kantor</h5>
+                                <p class="card-text" style="color: #000;">Jalan Mawar II, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="btn btn-primary" style="margin-top:2.5rem!important;"><i class="fas fa-fw fa-pencil"></i> Pilih</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">TUTUP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://momentjs.com/downloads/moment.min.js"></script>
+        <script src="https://momentjs.com/downloads/moment-timezone-with-data-10-year-range.min.js"></script>
+        <!-- <script>
+            $(document).ready(function(){
+                var d = new Date().toISOString();
+                d = moment.tz(d, "Asia/Jakarta").format();
+                var minDate = d.substring(0, 11) + "00:00";
+                console.log(minDate);
+                $(".datetimepicker").attr({
+                    "value" : minDate,
+                    "min" : minDate,
+                });
+            });
+        </script> -->
+        <script>
+            var today = new Date();
+            var dd = today.getDate() + 1;
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            //
+            var hh = today.getHours();
+            var m = today.getMinutes();
+
+            if (dd < 10)
+            {
+                dd = '0' + dd;
+            }
+
+            if (mm < 10)
+            {
+                mm = '0' + mm;
+            }
+
+            today_min = `${yyyy}-${mm}-${dd}T00:00`;
+
+            //or Year-Month-Day
+            document.getElementById("datetime-local").setAttribute("min", today_min);
+            document.getElementById("datetime-local").setAttribute("value", today_min);
+        </script>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+    </body>
+</html>

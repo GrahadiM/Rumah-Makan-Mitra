@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Rumah Makan Mitra</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/custom.css" rel="stylesheet" />
+
+    </head>
+    <body id="page-top">
+
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-header text-uppercase fixed-top" id="mainSubnav">
+            <div class="container">
+                <a class="navbar-brand" href="index2.html">Akun</a>
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><button class="nav-link py-lg-2 px-0 px-lg-2 rounded" data-bs-toggle="modal" data-bs-target="#cart"><i class="fas fa-shopping-cart text-dark"></i></button></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-lg-2 px-0 px-lg-3 rounded" href="akun.html">Nama Pengguna</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a data-bs-toggle="modal" data-bs-target="#profile">
+                                    <img src="assets/img/product/ayam-bakar.jpg" class="card-img-top img-fluid img-thumbnail rounded-pill" style="height:250px;width:250px;" alt="profile">
+                                </a>
+                                <h5 class="card-title text-dark text-center mt-4">Nama Pengguna</h5>
+                                <a href="akun.html" class="btn btn-outline-secondary d-block mt-4" style="text-align: start;"><i class="far fa-edit me-3"></i> Edit Profile</a>
+                                <a href="password.html" class="btn btn-outline-secondary d-block mt-4" style="text-align: start;"><i class="fas fa-key me-3"></i> Edit Password</a>
+                                <a href="alamat.html" class="btn btn-outline-secondary d-block mt-4" style="text-align: start;"><i class="fas fa-map-marker-alt me-3"></i> Alamat</a>
+                                <a href="riwayat.html" class="btn btn-outline-secondary d-block mt-4" style="text-align: start;"><i class="far fa-calendar-alt me-3"></i> Pesanan Saya</a>
+                                <a href="bantuan.html" class="btn btn-outline-secondary d-block mt-4" style="text-align: start;"><i class="far fa-question-circle me-3"></i> Pusat Bantuan</a>
+                                <a href="index.html" class="btn btn-outline-danger d-block mt-4" style="text-align: start;"><i class="fas fa-sign-out-alt me-3"></i> Keluar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #000;">Alamat Tersimpan</h5>
+                                <p class="card-text" style="color: #000;">Masukan alamat dengan benar untuk memudahkan proses pengantaran</p>
+                                <div class="d-md-flex justify-content-md-end">
+                                    <button data-bs-toggle="modal" data-bs-target="#tambahAlamat" class="btn btn-sm btn-primary text-decoration-none fw-bold px-5">Tambah Alamat Baru</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class="col-md-9 card-title" style="color: #000;">Rumah <span class="badge bg-primary ms-5">Alamat Utama</span></h5>
+                                    <div class="col-md-3 d-flex justify-content-end">
+                                        <button data-bs-toggle="modal" data-bs-target="#editAlamat" class="btn btn-sm btn-secondary text-decoration-none fw-bold mb-4 me-1"><i class="fas fa-pencil-alt"></i></button>
+                                        <button data-bs-toggle="modal" data-bs-target="#hapusAlamat" class="btn btn-sm btn-danger text-decoration-none fw-bold mb-4 me-1"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="card-text" style="color: #000;">
+                                            Susan
+                                            <br>
+                                            +6286789090905
+                                        </p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <p class="card-text" style="color: #000;">Jalan Mawar II, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class="col-md-9 card-title" style="color: #000;">Kantor</h5>
+                                    <div class="col-md-3 d-flex justify-content-end">
+                                        <button class="btn btn-sm btn-primary text-decoration-none fw-bold mb-4 me-1" onclick="location.href='alamat-tersimpan.html'">Set Utama</button>
+                                        <button data-bs-toggle="modal" data-bs-target="#editAlamat" class="btn btn-sm btn-secondary text-decoration-none fw-bold mb-4 me-1"><i class="fas fa-pencil-alt"></i></button>
+                                        <button data-bs-toggle="modal" data-bs-target="#hapusAlamat" class="btn btn-sm btn-danger text-decoration-none fw-bold mb-4 me-1"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="card-text" style="color: #000;">
+                                            Susan
+                                            <br>
+                                            +6286789090905
+                                        </p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <p class="card-text" style="color: #000;">Jalan Mawar II, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class="col-md-9 card-title" style="color: #000;">Kantor 2</h5>
+                                    <div class="col-md-3 d-flex justify-content-end">
+                                        <button class="btn btn-sm btn-primary text-decoration-none fw-bold mb-4 me-1" onclick="location.href='alamat-tersimpan.html'">Set Utama</button>
+                                        <button data-bs-toggle="modal" data-bs-target="#editAlamat" class="btn btn-sm btn-secondary text-decoration-none fw-bold mb-4 me-1"><i class="fas fa-pencil-alt"></i></button>
+                                        <button data-bs-toggle="modal" data-bs-target="#hapusAlamat" class="btn btn-sm btn-danger text-decoration-none fw-bold mb-4 me-1"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="card-text" style="color: #000;">
+                                            Susan
+                                            <br>
+                                            +6286789090905
+                                        </p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <p class="card-text" style="color: #000;">Jalan Mawar II, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Social Icons-->
+                    <div class="col-lg-2 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Contact Us</h4>
+                        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-instagram"></i></a>
+                        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-whatsapp"></i></a>
+                        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    </div>
+                    <!-- Footer About Text-->
+                    <div class="col-lg-10">
+                        <p class="lead mb-0 mt-5">
+                            <span>Rumah Makan Mitra @ <script language='JavaScript'>document.write(new Date().getFullYear());</script></span>
+                            <br><a href="http://startbootstrap.com" class="text-decoration-none text-dark">Syarat dan Ketentuan</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Copyright Section-->
+        <!-- <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright &copy; Gify Tech 2022</small></div>
+        </div> -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="tambahAlamat" tabindex="-1" aria-labelledby="tambahAlamat" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="tambahAlamat">Tambah Alamat</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Judul Alamat</label>
+                            <input type="text" class="form-control" id="title" placeholder="Contoh: Rumah, Kost, Kontrakan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" placeholder="Nama Lengkap Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label for="wa" class="form-label">No WhatsApp</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+62</span>
+                                <input type="number" class="form-control" id="wa" min="1" placeholder="85767113554">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">No Telpon</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+62</span>
+                                <input type="number" class="form-control" id="phone" min="1" placeholder="85767113554">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Alamat</label>
+                            <textarea class="form-control" id="phone" rows="10" placeholder="Detail nama jalan"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="provinsi" class="form-label">Provinsi</label>
+                            <select class="form-select" id="provinsi" aria-label="Default select example">
+                                <option class="text-uppercase" selected>Pilih Provinsi</option>
+                                <option class="text-uppercase" value="1">JAWA TIMUR</option>
+                                <option class="text-uppercase" value="2">BANTEN</option>
+                                <option class="text-uppercase" value="3">DKI JAKARTA</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Kota</label>
+                            <select class="form-select" id="city" aria-label="Default select example">
+                                <option class="text-uppercase" selected>Pilih Kota</option>
+                                <option class="text-uppercase" value="1">KOTA JAKARTA SELATAN</option>
+                                <option class="text-uppercase" value="2">KOTA JAKARTA TIMUR</option>
+                                <option class="text-uppercase" value="3">KOTA JAKARTA PUSAT</option>
+                                <option class="text-uppercase" value="4">KOTA JAKARTA BARAT</option>
+                                <option class="text-uppercase" value="5">KOTA JAKARTA UTARA</option>
+                                <option class="text-uppercase" value="6">KOTA KEDIRI</option>
+                                <option class="text-uppercase" value="7">KOTA BLITAR</option>
+                                <option class="text-uppercase" value="8">KOTA TULUNGAGUNG</option>
+                                <option class="text-uppercase" value="9">KOTA MALANG</option>
+                                <option class="text-uppercase" value="10">KOTA BANYUWANGI</option>
+                                <option class="text-uppercase" value="11">KOTA CILEGON</option>
+                                <option class="text-uppercase" value="12">KOTA TANGERANG</option>
+                                <option class="text-uppercase" value="13">KOTA TANGERANG SELATAN</option>
+                                <option class="text-uppercase" value="14">KOTA SERANG</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kecamatan" class="form-label">Kecamatan</label>
+                            <select class="form-select" id="kecamatan" aria-label="Default select example">
+                                <option class="text-uppercase" selected>Pilih Kecamatan</option>
+                                <option class="text-uppercase" value="1">PISANGAN TIMUR</option>
+                                <option class="text-uppercase" value="2">PULO GADUNG</option>
+                                <option class="text-uppercase" value="3">RAWAMANGUN</option>
+                                <option class="text-uppercase" value="4">KAYU PUTIH</option>
+                                <option class="text-uppercase" value="5">JATINEGARA KAUM</option>
+                                <option class="text-uppercase" value="6">Kandangan</option>
+                                <option class="text-uppercase" value="7">Gampengrejo</option>
+                                <option class="text-uppercase" value="8">Kandat</option>
+                                <option class="text-uppercase" value="9">Mojo</option>
+                                <option class="text-uppercase" value="10">Ngadiluwih</option>
+                                <option class="text-uppercase" value="11">Pare</option>
+                                <option class="text-uppercase" value="12">Batuceper</option>
+                                <option class="text-uppercase" value="13">Cibodas</option>
+                                <option class="text-uppercase" value="14">Ciledug</option>
+                                <option class="text-uppercase" value="15">Cipondoh</option>
+                                <option class="text-uppercase" value="16">Jatiuwung</option>
+                                <option class="text-uppercase" value="17">Karangtengah</option>
+                                <option class="text-uppercase" value="18">Karawaci</option>
+                                <option class="text-uppercase" value="19">Cipocok Jaya</option>
+                                <option class="text-uppercase" value="20">Curug</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="code_pos" class="form-label">Kode Pos</label>
+                            <input type="number" class="form-control" id="code_pos" min="1" placeholder="13220">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BATAL</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='alamat-tersimpan.html'">SIMPAN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editAlamat" tabindex="-1" aria-labelledby="editAlamat" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editAlamat">Edit Alamat</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Judul Alamat</label>
+                            <input type="text" class="form-control" id="title" value="Rumah">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" value="Susan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="wa" class="form-label">No WhatsApp</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+62</span>
+                                <input type="number" class="form-control" id="wa" min="1" value="86789090905">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">No Telpon</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+62</span>
+                                <input type="number" class="form-control" id="phone" min="1" value="86789090905">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Alamat</label>
+                            <textarea class="form-control" id="phone" rows="10" value="Jalan Mawar II, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Kota Jakarta Barat, DKI Jakarta 11530"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="provinsi" class="form-label">Provinsi</label>
+                            <select class="form-select" id="provinsi" aria-label="Default select example">
+                                <option class="text-uppercase" value="1">JAWA TIMUR</option>
+                                <option class="text-uppercase" value="2">BANTEN</option>
+                                <option class="text-uppercase" value="3" selected>DKI JAKARTA</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Kota</label>
+                            <select class="form-select" id="city" aria-label="Default select example">
+                                <option class="text-uppercase" value="1">KOTA JAKARTA SELATAN</option>
+                                <option class="text-uppercase" value="2" selected>KOTA JAKARTA TIMUR</option>
+                                <option class="text-uppercase" value="3">KOTA JAKARTA PUSAT</option>
+                                <option class="text-uppercase" value="4">KOTA JAKARTA BARAT</option>
+                                <option class="text-uppercase" value="5">KOTA JAKARTA UTARA</option>
+                                <option class="text-uppercase" value="6">KOTA KEDIRI</option>
+                                <option class="text-uppercase" value="7">KOTA BLITAR</option>
+                                <option class="text-uppercase" value="8">KOTA TULUNGAGUNG</option>
+                                <option class="text-uppercase" value="9">KOTA MALANG</option>
+                                <option class="text-uppercase" value="10">KOTA BANYUWANGI</option>
+                                <option class="text-uppercase" value="11">KOTA CILEGON</option>
+                                <option class="text-uppercase" value="12">KOTA TANGERANG</option>
+                                <option class="text-uppercase" value="13">KOTA TANGERANG SELATAN</option>
+                                <option class="text-uppercase" value="14">KOTA SERANG</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kecamatan" class="form-label">Kecamatan</label>
+                            <select class="form-select" id="kecamatan" aria-label="Default select example">
+                                <option class="text-uppercase" value="1">PISANGAN TIMUR</option>
+                                <option class="text-uppercase" value="2">PULO GADUNG</option>
+                                <option class="text-uppercase" value="3" selected>RAWAMANGUN</option>
+                                <option class="text-uppercase" value="4">KAYU PUTIH</option>
+                                <option class="text-uppercase" value="5">JATINEGARA KAUM</option>
+                                <option class="text-uppercase" value="6">Kandangan</option>
+                                <option class="text-uppercase" value="7">Gampengrejo</option>
+                                <option class="text-uppercase" value="8">Kandat</option>
+                                <option class="text-uppercase" value="9">Mojo</option>
+                                <option class="text-uppercase" value="10">Ngadiluwih</option>
+                                <option class="text-uppercase" value="11">Pare</option>
+                                <option class="text-uppercase" value="12">Batuceper</option>
+                                <option class="text-uppercase" value="13">Cibodas</option>
+                                <option class="text-uppercase" value="14">Ciledug</option>
+                                <option class="text-uppercase" value="15">Cipondoh</option>
+                                <option class="text-uppercase" value="16">Jatiuwung</option>
+                                <option class="text-uppercase" value="17">Karangtengah</option>
+                                <option class="text-uppercase" value="18">Karawaci</option>
+                                <option class="text-uppercase" value="19">Cipocok Jaya</option>
+                                <option class="text-uppercase" value="20">Curug</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="code_pos" class="form-label">Kode Pos</label>
+                            <input type="number" class="form-control" id="code_pos" min="1" value="13220">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BATAL</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='alamat-tersimpan.html'">SIMPAN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="hapusAlamat" tabindex="-1" aria-labelledby="hapusAlamat" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="hapusAlamat">Hapus Alamat</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Anda akan menghapus Rumah(dinamis!!)! <br> Anda tidak dapat mengembalikan data alamat yang sudah dihapus.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BATAL</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="location.href='alamat-tersimpan.html'">HAPUS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Profile -->
+        <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="profile" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="profile">Photo Profile</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row" action="" method="POST">
+                            <div class="col-md-12 mt-2">
+                                <input type="file" name="profile" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">TUTUP</button>
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Keranjang -->
+        <div class="modal fade" id="cart" tabindex="-1" aria-labelledby="cart" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="cart">Menu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <!-- Portfolio Item -->
+                            <div class="col-6">
+                                <a href="keranjang-instan-order.html" class="text-decoration-none">
+                                    <img class="img-fluid" src="assets/img/menu/instant-logo.png" alt="..." />
+                                </a>
+                            </div>
+                            <!-- Portfolio Item -->
+                            <div class="col-6">
+                                <a href="keranjang-catering.html" class="text-decoration-none">
+                                    <img class="img-fluid" src="assets/img/menu/catering-logo.png" alt="..." />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">TUTUP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+    </body>
+</html>

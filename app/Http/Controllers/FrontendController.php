@@ -97,6 +97,8 @@ class FrontendController extends Controller
     public function riwayat()
     {
         $data['title'] = 'Riwayat';
+        $data['instan'] = Transaction::with('customer','address')->where('type', 'instan')->latest('id')->get();
+        $data['katering'] = Transaction::with('customer','address')->where('type', 'katering')->latest('id')->get();
         return view('frontend.riwayat', $data);
     }
 

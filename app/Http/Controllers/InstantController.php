@@ -36,6 +36,7 @@ class InstantController extends Controller
         $data['adr'] = Transaction::with('customer', 'address')->where([
 			['customer_id', Auth::user()->id],
 			['type', 'instan'],
+			['status', 'PENDING'],
 		])->first();
         $data['address'] = Address::with('user')->where([
 			['user_id', Auth::user()->id],

@@ -27,9 +27,12 @@
         <section class="page-section category" id="category">
             <div class="container">
                 <div class="card mb-5">
+                    <div class="card-header">
+                        <a href="{{ route('fe.resto_instan') }}" class="btn btn-sm btn-danger">Tambah Pesanan?</a>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title" style="color: #000;">Pesanan</h5>
-                        <div class="card border-0 mt-4">
+                        <div class="card border-0 mt-2">
                             <div class="row g-0">
                                 @forelse ($items as $item)
                                     <div class="col-md-2 p-3">

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\UpdatePasswordRequest;
-use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 
 class ProfileController extends Controller
 {
@@ -43,7 +44,8 @@ class ProfileController extends Controller
             Auth::user()->update($input);
         }
 
-        return redirect()->back()->with('success', 'Upload photo profile berhasil ditambahkan!');
+        Alert::success('Data Profile Berhasil Diubah');
+        return redirect()->back();
     }
 
     public function password(UpdatePasswordRequest $request)

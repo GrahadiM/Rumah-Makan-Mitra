@@ -68,7 +68,7 @@ Route::middleware(['xss'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-        Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function () {
+        Route::controller(App\Http\Controllers\ProfileController::class)->prefix('profile')->name('profile.')->group(function () {
             Route::get('/', 'edit')->name('edit');
             Route::put('/', 'update')->name('update');
             Route::post('upload', 'upload')->name('upload');

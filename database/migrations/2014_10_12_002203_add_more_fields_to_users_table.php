@@ -17,7 +17,7 @@ class AddMoreFieldsToUsersTable extends Migration
             $table->renameColumn('name', 'firstname');
             $table->string('lastname')->after('name');
             $table->string('phone')->nullable()->after('username');
-            // $table->bigInteger('address_id')->nullable()->after('phone');
+            $table->string('avatar')->nullable()->after('phone');
         });
     }
 

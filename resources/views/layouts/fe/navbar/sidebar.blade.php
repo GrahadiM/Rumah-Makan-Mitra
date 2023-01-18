@@ -3,7 +3,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <a data-bs-toggle="modal" data-bs-target="#profile">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/ayam-bakar.jpg" class="card-img-top img-fluid img-thumbnail rounded-pill" style="height:250px;width:250px;" alt="profile">
+                                    @if (Auth::user()->avatar == NULL)
+                                    <img src="{{ asset('images/avatar/default.png') }}" class="card-img-top img-fluid img-thumbnail rounded-pill" style="height:250px;width:250px;" alt="profile">
+                                    @else
+                                    <img src="{{ asset('images/avatar').'/'.Auth::user()->avatar }}" class="card-img-top img-fluid img-thumbnail rounded-pill" style="height:250px;width:250px;" alt="profile">
+                                    @endif
                                 </a>
                                 <h5 class="card-title text-dark text-center mt-4">{{ Auth::user()->fullname }}</h5>
                                 <a href="{{ route('fe.akun') }}" class="btn btn-outline-secondary d-block mt-4" style="text-align: start;"><i class="far fa-edit me-3"></i> Edit Profile</a>

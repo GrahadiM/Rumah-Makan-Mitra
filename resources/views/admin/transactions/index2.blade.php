@@ -45,7 +45,7 @@
                             @elseif ($dt->status == 'PROSES')
                                 <button disabled href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-warning">{{ $dt->status }}</button>
                             @elseif ($dt->status == 'SUCCESS')
-                                <button disabled href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-succes">{{ $dt->status }}</button>
+                                <button disabled href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-success">{{ $dt->status }}</button>
                             @else
                                 <button disabled href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-danger">{{ $dt->status }}</button>
                             @endif

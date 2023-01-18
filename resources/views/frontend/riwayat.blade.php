@@ -43,7 +43,7 @@
                                                     @elseif ($item->status == 'PROSES')
                                                         <button class="btn btn-sm rounded btn-outline-warning">{{ $item->status }}</button>
                                                     @elseif ($item->status == 'SUCCESS')
-                                                        <button class="btn btn-sm rounded btn-outline-succes">{{ $item->status }}</button>
+                                                        <button class="btn btn-sm rounded btn-outline-success">{{ $item->status }}</button>
                                                     @else
                                                         <button class="btn btn-sm rounded btn-outline-danger">{{ $item->status }}</button>
                                                     @endif

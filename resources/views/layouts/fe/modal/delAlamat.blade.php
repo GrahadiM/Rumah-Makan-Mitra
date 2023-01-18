@@ -14,7 +14,7 @@
                         <form action="{{ route('fe.delete_alamat') }}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <input type="text" name="id" value="{{ $item->id }}">
+                            <input type="hidden" name="id" value="{{ $item->id }}">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BATAL</button>
                             <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">HAPUS</button>
                         </form>

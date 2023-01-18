@@ -17,7 +17,7 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <strong>Code Transaction : </strong>
+                <strong>Code : </strong>
                 {{ $dt->kode_transaksi }}
             </div>
             <div class="form-group">
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <strong>Total Price : </strong>
-                {{ __('Rp.').number_format($dt->total,2,',','.') }}
+                {{ __('Rp.').number_format($dt->total_harga,2,',','.') }}
             </div>
             <div class="form-group">
                 <strong>Order by : </strong>

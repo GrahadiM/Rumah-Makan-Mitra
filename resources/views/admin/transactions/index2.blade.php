@@ -24,7 +24,7 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Code Transaction</th>
+                        <th>Code</th>
                         <th>Customer</th>
                         <th>Total Harga</th>
                         <th>Alamat</th>
@@ -37,7 +37,7 @@
                     <tr>
                         <td>{{ $dt->kode_transaksi }}</td>
                         <td>{{ $dt->customer->fullname }}</td>
-                        <td>{{ __('Rp.').number_format($dt->total,2,',','.') }}</td>
+                        <td>{{ __('Rp.').number_format($dt->total_harga,2,',','.') }}</td>
                         <td>{{ strtoupper($dt->address->title) }}</td>
                         <td>
                             @if ($dt->status == 'PENDING')
@@ -79,18 +79,17 @@
     <script>
     $(function () {
         $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        "buttons": ["csv"]
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["csv", "excel", "pdf", "print", "colvis"],
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
     });
     </script>

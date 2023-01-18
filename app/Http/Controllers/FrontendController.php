@@ -242,14 +242,16 @@ class FrontendController extends Controller
         return back();
     }
 
-    public function pay(Request $request)
+    public function pay(Request $request, $id)
     {
-        $atr = Transaction::with('customer')->where([
-			['customer_id', Auth::user()->id],
-			['status', 'PENDING'],
-            ['type', $request->type],
-            ['id', $request->id],
-		])->first();
+        // dd($request->all());
+        // $atr = Transaction::with('customer')->where([
+		// 	['customer_id', Auth::user()->id],
+		// 	['status', 'PENDING'],
+        //     ['type', $request->type],
+        //     ['id', $request->id],
+		// ])->latest('id')->first();
+        $atr = Transaction::with('customer')->find($id);
         $atr->total_harga = $request->total_harga;
         $atr->status = 'PROSES';
         $atr->update();
@@ -268,14 +270,14 @@ class FrontendController extends Controller
         }
 
         Alert::success('Silahkan Segera Proses Pembayaran Anda!');
-        return route('fe.invoice', $atr->id);
+        return redirect()->route('fe.invoice', $atr->id);
     }
 
-    public function invoice(Request $request)
+    public function invoice(Request $request, $id)
     {
         $data['transaksi'] = Transaction::with('customer')->where([
 			['customer_id', Auth::user()->id],
-            ['id', 1],
+            ['id', $id],
 		])->latest('id')->first();
         $data['items'] = OrderProduct::where('transaction_id', $data['transaksi']->id)->get();
 

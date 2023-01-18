@@ -24,7 +24,7 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Code Transaction</th>
+                        <th>Code</th>
                         <th>Customer</th>
                         <th>Order by</th>
                         <th>Total Harga</th>
@@ -40,7 +40,7 @@
                         <td>{{ $dt->kode_transaksi }}</td>
                         <td>{{ $dt->customer->fullname }}</td>
                         <td>{{ strtoupper($dt->type) }}</td>
-                        <td>{{ __('Rp.').number_format($dt->total,2,',','.') }}</td>
+                        <td>{{ __('Rp.').number_format($dt->total_harga,2,',','.') }}</td>
                         <td>{{ $dt->address->title }}</td>
                         <td>
                             @if ($dt->status == 'PENDING')
@@ -48,7 +48,7 @@
                             @elseif ($dt->status == 'PROSES')
                                 <a href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-warning">{{ $dt->status }}</a>
                             @elseif ($dt->status == 'SUCCESS')
-                                <a href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-succes">{{ $dt->status }}</a>
+                                <a href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-success">{{ $dt->status }}</a>
                             @else
                                 <a href="{{ route('admin.transactions.status', $dt->id) }}" class="btn btn-danger">{{ $dt->status }}</a>
                             @endif
@@ -101,21 +101,21 @@
     <script src="{{ asset('admin') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                // "buttons": ["pdf"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["csv", "excel", "pdf", "print", "colvis"],
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
+    });
     </script>
 
 @endpush

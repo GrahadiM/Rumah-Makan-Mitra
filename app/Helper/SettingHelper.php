@@ -17,8 +17,8 @@ class SettingHelper
 
     public static function getDisable()
     {
-        $start = '09:00:00';
-        $end = '21:00:00';
+        $start = '00:00:00';
+        $end = '24:00:00';
         $button = Carbon::now()->between($start, $end) ? NULL : 'disabled';
         return $button;
     }
@@ -63,5 +63,11 @@ class SettingHelper
         }
 
         return redirect()->back()->with('success', 'Upload photo profile berhasil ditambahkan!');
+    }
+
+    public function getTotal(Request $request, $total)
+    {
+        $total_price = $total+($total*(10/100));
+        return $total_price;
     }
 }

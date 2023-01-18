@@ -17,10 +17,10 @@
                             <span class="input-group-text" id="note"><i class="far fa-sticky-note"></i></span>
                             @method('PUT')
                             @csrf
-                            <input type="text" name="note" class="form-control" placeholder="Tambahkan catatan pengiriman" aria-label="Note" aria-describedby="note" value="{{ $adr->note == NULL ? '' : $adr->note }}">
                             <input type="hidden" name="id" value="{{ $adr->id }}">
                             <input type="hidden" name="type" value="{{ $adr->type }}">
-                            <button class="input-group-text" type="submit">Submit</button>
+                            <input type="text" name="note" class="form-control" placeholder="Tambahkan catatan pengiriman" aria-label="Note" aria-describedby="note" value="{{ $adr->note == NULL ? '' : $adr->note }}">
+                            {{-- <button class="input-group-text" type="submit">Submit</button> --}}
                         </form>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                         <h5>{{ __('Rp.').number_format($total+($total*(10/100)),2,',','.') }}</h5>
                     </div>
                     <div class="col-md-2">
-                        <form class="modal-body row" action="{{ route('fe.pay') }}" method="POST">
+                        <form class="modal-body row" action="{{ route('fe.pay', $adr->id) }}" method="POST">
                             @method('PUT')
                             @csrf
                             <input type="hidden" name="id" value="{{ $adr->id }}">

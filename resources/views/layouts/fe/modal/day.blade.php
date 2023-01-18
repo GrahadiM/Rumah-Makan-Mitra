@@ -68,7 +68,7 @@
 
             //or Year-Month-Day
             document.getElementById("datetime-local").setAttribute("min", today_min);
-            // document.getElementById("datetime-local").setAttribute("value", today_min);
+            document.getElementById("datetime-local").setAttribute("value", today_min);
         </script>
         @if (\Setting::getDay() == NULL)
             <script>

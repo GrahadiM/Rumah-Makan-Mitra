@@ -17,7 +17,7 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Code Transaction</th>
+                        <th>Code</th>
                         <th>Nama Customer</th>
                         <th>Total Harga</th>
                         <th>Tanggal</th>
@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $dt->kode_transaksi }}</td>
                         <td>{{ $dt->customer->fullname }}</td>
-                        <td>{{ __('Rp.').number_format($dt->total,2,',','.') }}</td>
+                        <td>{{ __('Rp.').number_format($dt->total_harga,2,',','.') }}</td>
                         <td>{{ $dt->created_at }}</td>
                     </tr>
                     @endforeach
@@ -56,21 +56,21 @@
     <script src="{{ asset('admin') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                // "buttons": ["pdf"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["csv", "excel", "pdf", "print", "colvis"],
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
+    });
     </script>
 
 @endpush

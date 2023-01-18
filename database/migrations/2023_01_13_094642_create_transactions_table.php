@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('address_id')->constrained('address')->onDelete('restrict')->nullable();
             // $table->integer('address_id')->nullable();
             $table->string('kode_transaksi')->nullable();
-            $table->integer('total_harga')->nullable();
+            $table->string('total_harga')->nullable();
             $table->string('type')->nullable(); // katering and instan
             $table->string('note')->nullable();
             $table->string('status', 100)->default('PENDING');

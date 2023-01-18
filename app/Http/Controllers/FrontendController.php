@@ -138,8 +138,14 @@ class FrontendController extends Controller
                 ['type', 'UTAMA'],
             ])->first();
 
+            if ($data == NULL || empty($data)) {
+                Alert::warning('Data Alamat Anda Kosong!');
+                return redirect()->route('fe.alamat');
+            }
+
             $atr = Transaction::with('customer')->where([
                 ['customer_id', Auth::user()->id],
+                ['status', 'PENDING'],
                 ['type', $request->type],
             ])->first();
 
@@ -210,13 +216,15 @@ class FrontendController extends Controller
 
     public function update_note(Request $request, $id)
     {
+        // dd($request->all());
         $atr = Transaction::with('customer')->where([
 			['customer_id', Auth::user()->id],
 			['status', 'PENDING'],
-			// ['id', $id],
+            ['type', $request->type],
+            ['id', $id],
 		])->first();
 
-        $atr->address_id = $request->address;
+        $atr->note = $request->note;
         // dd($atr->address);
         $atr->update();
 

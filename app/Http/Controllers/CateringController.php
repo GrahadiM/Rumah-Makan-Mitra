@@ -62,6 +62,11 @@ class CateringController extends Controller
 			['type', 'UTAMA'],
 		])->first();
 
+        if ($data == NULL || empty($data)) {
+            Alert::warning('Data Alamat Anda Kosong!');
+            return redirect()->route('fe.alamat');
+        }
+
         $atr = Transaction::with('customer')->where([
 			['customer_id', Auth::user()->id],
 			['type', $request->type],

@@ -13,11 +13,14 @@
                         <button data-bs-toggle="modal" data-bs-target="#hari" class="col-md-2 btn btn-sm btn-primary text-decoration-none fw-bold">Order min H-1</button>
                         <a data-bs-toggle="modal" data-bs-target="#alamat" class="col-md-12 card-text text-decoration-underline" style="color: #000;">{{ $adr->address->title }}</a>
                         <p class="col-md-12 card-text" style="color: #000;">{{ $adr->address->address. ', ' .$adr->address->provinsi. ', ' .$adr->address->kabupaten. ', ' .$adr->address->kecamatan. ', ' .$adr->address->pos }}</p>
-                        <form action="" method="POST">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="note"><i class="far fa-sticky-note"></i></span>
-                                <input type="text" class="form-control" placeholder="Tambahkan catatan pengiriman" aria-label="Note" aria-describedby="note">
-                            </div>
+                        <form class="input-group mb-3" action="{{ route('fe.update_note', $adr->id) }}" method="POST">
+                            <span class="input-group-text" id="note"><i class="far fa-sticky-note"></i></span>
+                            @method('PUT')
+                            @csrf
+                            <input type="text" name="note" class="form-control" placeholder="Tambahkan catatan pengiriman" aria-label="Note" aria-describedby="note" value="{{ $adr->note == NULL ? '' : $adr->note }}">
+                            <input type="hidden" name="id" value="{{ $adr->id }}">
+                            <input type="hidden" name="type" value="{{ $adr->type }}">
+                            <button class="input-group-text" type="submit">Submit</button>
                         </form>
                     </div>
                 </div>

@@ -33,7 +33,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Alamat</label>
-                            <textarea name="address" class="form-control" id="address" rows="10" placeholder="Detail nama jalan"></textarea>
+                            <textarea name="address" class="form-control" id="address" rows="10" placeholder="Detail Alamat"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="provinsi" class="form-label">Provinsi</label>

@@ -17,8 +17,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $data = Transaction::with('customer','package','employe','category')->latest('id')->get();
-        return view('admin.transactions.index',compact('data'));
+        $data['title'] = '';
+        $data['data'] = Transaction::with('customer','address')->latest('id')->get();
+        return view('admin.transactions.index', $data);
     }
 
     /**

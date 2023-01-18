@@ -24,10 +24,10 @@
                 <strong>Slug : </strong>
                 {{ $category->slug }}
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <strong>Detail : </strong>
                 {{ $category->detail == null ? '-' : $category->detail }}
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

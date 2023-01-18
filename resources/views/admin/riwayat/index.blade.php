@@ -17,7 +17,7 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Code</th>
+                        <th>Code Transaction</th>
                         <th>Nama Customer</th>
                         <th>Total Harga</th>
                         <th>Tanggal</th>
@@ -26,21 +26,13 @@
                 <tbody>
                     @foreach ($data as $key => $dt)
                     <tr>
-                        <td>{{ $dt->code_order }}</td>
-                        <td>{{ $dt->customer->name }}</td>
+                        <td>{{ $dt->kode_transaksi }}</td>
+                        <td>{{ $dt->customer->fullname }}</td>
                         <td>{{ __('Rp.').number_format($dt->total,2,',','.') }}</td>
                         <td>{{ $dt->created_at }}</td>
                     </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Code</th>
-                        <th>Nama Customer</th>
-                        <th>Tanggal</th>
-                        <th>Total Harga</th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>

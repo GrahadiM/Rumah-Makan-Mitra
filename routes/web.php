@@ -30,7 +30,7 @@ Route::middleware(['xss'])->group(function () {
                         Route::post('/post_catering', 'post_catering')->name('post_catering');
                         Route::put('/update_catering', 'update_catering')->name('update_catering');
                     });
-                    Route::controller(App\Http\Controllers\InstanController::class)->group(function () {
+                    Route::controller(App\Http\Controllers\InstantController::class)->group(function () {
                         Route::get('/instan', 'instan')->name('instan');
                         Route::get('/resto-instan', 'resto_instan')->name('resto_instan');
                         Route::get('/cart-instan', 'cart_instan')->name('cart_instan');
@@ -75,19 +75,22 @@ Route::middleware(['xss'])->group(function () {
             Route::put('password', 'password')->name('password');
         });
 
-        Route::resource('categories', CategoryController::class);
-        Route::resource('packages', PackageController::class);
+        Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+        Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
         Route::resource('transactions', App\Http\Controllers\Admin\TransactionController::class);
-        Route::resource('riwayat', RiwayatController::class);
+        Route::resource('order_products', App\Http\Controllers\Admin\OrderProductController::class);
+        Route::resource('transactions_instant', App\Http\Controllers\Admin\InstantController::class);
+        Route::resource('transactions_catering', App\Http\Controllers\Admin\CateringController::class);
+        Route::resource('riwayat', App\Http\Controllers\Admin\RiwayatController::class);
         Route::controller(App\Http\Controllers\Admin\TransactionController::class)->name('transactions.')->group(function () {
             Route::get('/status/{id}', 'status')->name('status');
             Route::put('/status/{id}', 'status_update')->name('status_update');
         });
 
-        Route::resource('roles', RoleController::class);
-        Route::resource('users', UserController::class);
+        Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 
-        Route::controller(SettingWebsiteController::class)->prefix('setting')->name('setting.')->group(function () {
+        Route::controller(App\Http\Controllers\Admin\SettingWebsiteController::class)->prefix('setting')->name('setting.')->group(function () {
             Route::get('website', 'index')->name('index');
             Route::put('website/{admin_website}', 'update')->name('update');
         });

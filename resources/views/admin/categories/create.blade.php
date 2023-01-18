@@ -33,13 +33,13 @@
             <strong>Name:</strong>
             {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <strong>Detail:</strong>
             {!! Form::text('detail', null, array('placeholder' => 'Detail','class' => 'form-control')) !!}
+        </div> --}}
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </div>
 {!! Form::close() !!}

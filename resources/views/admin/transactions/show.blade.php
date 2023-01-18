@@ -17,40 +17,40 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <strong>Code Order : </strong>
-                {{ $dt->code_order }}
+                <strong>Code Transaction : </strong>
+                {{ $dt->kode_transaksi }}
             </div>
             <div class="form-group">
                 <strong>Customer : </strong>
-                {{ $dt->customer->name }}
+                {{ $dt->customer->fullname }}
             </div>
             <div class="form-group">
                 <strong>Phone : </strong>
-                {{ $dt->phone }}
+                {{ '+62'.$dt->customer->phone }}
             </div>
             <div class="form-group">
                 <strong>Address : </strong>
-                {{ $dt->address }}
+                {{ strtoupper($dt->address->title). ' - ' .$dt->address->address. ', ' .$dt->address->provinsi. ', ' .$dt->address->kabupaten. ', ' .$dt->address->kecamatan. ', ' .$dt->address->pos }}
             </div>
             <div class="form-group">
-                <strong>Total Harga : </strong>
+                <strong>Total Price : </strong>
                 {{ __('Rp.').number_format($dt->total,2,',','.') }}
             </div>
             <div class="form-group">
-                <strong>Kurir : </strong>
-                {{ $dt->order_by == NULL ? 'Data Tidak Ditemukan!' : $dt->order_by }}
+                <strong>Order by : </strong>
+                {{ $dt->type == NULL ? 'Data Tidak Ditemukan!' : strtoupper($dt->type) }}
             </div>
             <div class="form-group">
                 <strong>Status : </strong>
                 {{ $dt->status }}
             </div>
             <div class="form-group">
-                <strong>Tgl Penjemputan : </strong>
-                {{ $dt->tgl_penjemputan == NULL ? 'Data Tidak Ditemukan!' : $dt->tgl_penjemputan }}
+                <strong>Tanggal di Buat : </strong>
+                {{ $dt->created_at }}
             </div>
             <div class="form-group">
-                <strong>Tgl Pengantaran : </strong>
-                {{ $dt->tgl_pengantaran == NULL ? 'Data Tidak Ditemukan!' : $dt->tgl_pengantaran }}
+                <strong>Tanggal di Ubah : </strong>
+                {{ $dt->updated_at }}
             </div>
         </div>
     </div>

@@ -21,10 +21,10 @@
                 <div class="mb-2"><strong>Name : </strong></div>
                 {!! Form::text('name', null, ['required', 'placeholder' => 'Name', 'class' => 'form-control']) !!}
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <div class="mb-2"><strong>Detail : </strong></div>
                 {!! Form::text('detail', null, ['required', 'placeholder' => 'Detail', 'class' => 'form-control']) !!}
-            </div>
+            </div> --}}
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

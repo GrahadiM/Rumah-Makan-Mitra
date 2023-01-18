@@ -29,8 +29,8 @@
                 <div class="card mb-5">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #000;">Pesanan</h5>
-                        <div class="card border-0 mb-4">
-                            <div class="row g-0 mt-5">
+                        <div class="card border-0 mt-4">
+                            <div class="row g-0">
                                 @forelse ($items as $item)
                                     <div class="col-md-2 p-3">
                                         <img src="{{ asset('frontend/assets/img/product') . "/" . $item->product->thumbnail }}" class="img-fluid rounded-start" alt="Thumbnail">

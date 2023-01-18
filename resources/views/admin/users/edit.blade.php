@@ -18,8 +18,16 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <div class="mb-2"><strong>Nama : </strong></div>
-                {!! Form::text('name', null, ['required', 'placeholder' => 'Name', 'class' => 'form-control']) !!}
+                <div class="mb-2"><strong>Firstname : </strong></div>
+                {!! Form::text('firstname', null, ['required', 'placeholder' => 'Nama Depan', 'class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                <div class="mb-2"><strong>Lastname : </strong></div>
+                {!! Form::text('lastname', null, ['required', 'placeholder' => 'Nama Belakang', 'class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                <div class="mb-2"><strong>Username : </strong></div>
+                {!! Form::text('username', null, ['required', 'placeholder' => 'Username', 'class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <div class="mb-2"><strong>Email : </strong></div>
@@ -27,11 +35,11 @@
             </div>
             <div class="form-group">
                 <div class="mb-2"><strong>Password : </strong></div>
-                {!! Form::password('password', ['required', 'placeholder' => 'Password', 'class' => 'form-control']) !!}
+                {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <div class="mb-2"><strong>Konfirmasi Password : </strong></div>
-                {!! Form::password('confirm-password', ['required', 'placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
+                {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <div class="mb-2"><strong>Role : </strong></div>

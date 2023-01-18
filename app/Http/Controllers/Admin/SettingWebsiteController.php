@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SettingWebsite;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SettingWebsiteController extends Controller
 {
@@ -58,9 +59,7 @@ class SettingWebsiteController extends Controller
         $setting = SettingWebsite::get()->first();
         $setting->update($data);
 
-        session()->flash('success', "Data has been updated!!");
-
-        //redirect user
+        Alert::success('Data Berhasil di Ubah!');
         return redirect()->back();
     }
 

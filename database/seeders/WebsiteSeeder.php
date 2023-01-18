@@ -32,7 +32,7 @@ class WebsiteSeeder extends Seeder
             'facebook'  => 'https://www.facebook.com/',
             'youtube'  => 'https://www.youtube.com/',
             'working_hours' => 'Mon-Sun: 09.00 am - 21.00 pm',
-            'desc_footer' => 'Menjadi laundry yang keratif dan up to date yang dikelolah secara professional dengan memadukan kemajuan teknologi, sehingga memberikan keuntungan maksimal untuk Pelanggan, Pegawai, dan Pemilik',
+            'desc_footer' => '',
         ]);
     }
 }

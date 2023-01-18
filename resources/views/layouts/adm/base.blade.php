@@ -19,13 +19,14 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="
+            {{-- <img class="animation__shake" src="
             @if (\Setting::getSetting()->logo == null)
             {{ Storage::disk('local')->url('public/images/setting/logo_default.png') }}
             @else
             {{ Storage::disk('local')->url('public/images/setting/'.\Setting::getSetting()->logo) }}
             @endif
-            " alt="AdminLTELogo" height="60" width="120">
+            " alt="AdminLTELogo" height="60" width="120"> --}}
+            <h1 class="animation__shake">Rumah Makan Mitra</h1>
         </div>
 
         <!-- Navbar -->
@@ -44,6 +45,7 @@
                     <div class="col-sm">
                         <h1>@yield('title')</h1>
                         @include('layouts.adm.alert')
+                        @include('sweetalert::alert')
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

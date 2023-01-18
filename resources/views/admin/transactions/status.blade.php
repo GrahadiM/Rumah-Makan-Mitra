@@ -19,20 +19,19 @@
         <div class="card-body">
             <div class="form-group">
                 <div class="mb-2"><strong>Code Order : </strong></div>
-
-                {!! Form::text('code_order', null, ['required', 'placeholder' => 'Code Order', 'class' => 'form-control']) !!}
+                {!! Form::text('kode_transaksi', null, ['placeholder' => 'Code Order', 'class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 <strong>Status :</strong>
                 <select name="status" id="myselect" class="form-control">
                     <option value="{{ $dt->status }}" selected>{{ $dt->status }}</option>
-                    @if ($dt->status == 'Pending')
-                        <option value="Proses">Proses</option>
-                        <option value="Success">Success</option>
-                    @elseif ($dt->status == 'Proses')
-                        <option value="Success">Success</option>
-                    @elseif ($dt->status == 'Success')
-                        <option value="Proses">Proses</option>
+                    @if ($dt->status == 'PENDING')
+                        <option value="PROSES">PROSES</option>
+                        <option value="SUCCESS">SUCCESS</option>
+                    @elseif ($dt->status == 'PROSES')
+                        <option value="SUCCESS">SUCCESS</option>
+                    @elseif ($dt->status == 'SUCCESS')
+                        <option value="PROSES">PROSES</option>
                     @endif
                 </select>
             </div>

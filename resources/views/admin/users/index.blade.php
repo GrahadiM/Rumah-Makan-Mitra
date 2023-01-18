@@ -36,7 +36,7 @@
                     @foreach ($data as $key => $user)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->fullname }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
                             @if(!empty($user->getRoleNames()))
@@ -45,25 +45,24 @@
                               @endforeach
                             @endif
                         </td>
-                        <td>{{ $user->updated_at ? Carbon\Carbon::parse($user->updated_at)->diffForHumans() : Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
+                        <td>{{ $user->updated_at ? $user->updated_at : $user->created_at }}</td>
                         <td class="text-center">
                             <form action="{{ route('admin.users.destroy', $user->id) }}" class="row" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <div class="col-md-4">
                                     <a class="btn btn-info btn-sm" href="{{ route('admin.users.show', $user->id) }}">
-                                        <i class="fas fa-search mr-2"></i>
+                                        <i class="fas fa-search"></i>
                                     </a>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <a class="btn btn-primary btn-sm" href="{{ route('admin.users.edit', $user->id) }}">
-                                        <i class="fas fa-pencil-alt mr-2"></i>
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
                                     <button class="btn btn-danger btn-sm" type="submit">
-                                        <i class="fas fa-trash mr-2"></i>
-                                    </button>
+                                        <i class="fas fa-trash"></i></button>
                                 </div>
                             </form>
                         </td>

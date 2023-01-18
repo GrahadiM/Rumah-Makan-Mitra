@@ -16,7 +16,7 @@
         <div class="card-header">
             <h3 class="card-title">{{ trans('menu.package.title') }}</h3>
             <div class="card-tools">
-                <a href="{{ route('admin.packages.create') }}" class="btn btn-success btn-sm">{{ trans('global.add')." ".trans('menu.package.title') }}</a>
+                <a href="{{ route('admin.products.create') }}" class="btn btn-success btn-sm">{{ trans('global.add')." ".trans('menu.package.title') }}</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -27,8 +27,7 @@
                         <th>Nama</th>
                         <th>Kategori</th>
                         <th>Harga</th>
-                        <th>Qty</th>
-                        <th>Type</th>
+                        <th>Thumbnail</th>
                         <th>Detail</th>
                         <th>{{ trans('global.actions') }}</th>
                     </tr>
@@ -39,26 +38,29 @@
                         <td>{{ $dt->name }}</td>
                         <td>{{ $dt->category->name }}</td>
                         <td>{{ __('Rp.').number_format($dt->price,2,',','.') }}</td>
-                        <td>{{ $dt->qty }}</td>
-                        <td>{{ $dt->type }}</td>
+                        <td>
+                            <a href="{{ asset('frontend/assets/img/product') . "/" . $dt->thumbnail }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset('frontend/assets/img/product') . "/" . $dt->thumbnail }}" class="img-fluid rounded-start w-25" alt="Thumbnail">
+                            </a>
+                        </td>
                         <td>{{ $dt->body == null ? '-' : $dt->body }}</td>
                         <td class="text-center">
-                            <form action="{{ route('admin.packages.destroy', $dt->id) }}" class="row" method="POST">
+                            <form action="{{ route('admin.products.destroy', $dt->id) }}" class="row" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <div class="col-md-4">
-                                    <a class="btn btn-info btn-sm" href="{{ route('admin.packages.show', $dt->id) }}">
-                                        <i class="fas fa-search mr-2"></i>
+                                    <a class="btn btn-info btn-sm" href="{{ route('admin.products.show', $dt->id) }}">
+                                        <i class="fas fa-search"></i>
                                     </a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.packages.edit', $dt->id) }}">
-                                        <i class="fas fa-pencil-alt mr-2"></i>
+                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.products.edit', $dt->id) }}">
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </div>
                                 <div class="col-md-4">
                                     <button class="btn btn-danger btn-sm" type="submit">
-                                        <i class="fas fa-trash mr-2"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
                             </form>

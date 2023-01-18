@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\Clothes;
+use App\Models\Transaction;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class OrderProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::latest('id')->get();
-        return view('admin.categories.index',compact('data'));
+        //
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.order_products.create');
     }
 
     /**
@@ -40,16 +40,19 @@ class CategoryController extends Controller
     {
         request()->validate([
             'name' => 'required',
+            'detail' => 'required',
         ]);
 
-        $dt = new Category;
-        $dt->name = strtoupper($request->name);
-        $dt->slug = Str::slug($request->name);
+        $dt = new OrderProduct;
+        $dt->transaction_id = $request->tr_id;
+        $dt->name = $request->name;
+        $dt->qty = $request->qty;
+        $dt->detail = $request->detail;
         $dt->created_at = now();
         $dt->save();
 
-        return redirect()->route('admin.categories.index')
-                        ->with('success','Category created successfully.');
+        return redirect()->route('admin.order_products.show', $request->tr_id)
+                        ->with('success','Transaction created successfully.');
     }
 
     /**
@@ -58,10 +61,17 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request ,$id)
     {
-        $category = Category::find($id);
-        return view('admin.categories.show',compact('category'));
+        $data['tr'] = Transaction::find($id);
+        $data['data'] = OrderProduct::where('transaction_id', $id)->get();
+        return view('admin.order_products.index', $data);
+    }
+
+    public function clothes_detail(Request $request ,$id)
+    {
+        $data['data'] = OrderProduct::with('transaction')->where('transaction_id', $id)->get();
+        return view('admin.order_products.index',$data);
     }
 
     /**
@@ -72,8 +82,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.categories.edit',compact('category'));
+        $tr = Transaction::find($id);
+        return view('admin.order_products.edit',compact('tr'));
     }
 
     /**
@@ -85,18 +95,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        request()->validate([
-            'name' => 'required',
-        ]);
-
-        $dt = Category::find($id);
-        $dt->name = strtoupper($request->name);
-        $dt->slug = Str::slug($request->name);
-        $dt->updated_at = now();
-        $dt->update();
-
-        return redirect()->route('admin.categories.index')
-                        ->with('success','Category updated successfully');
+        //
     }
 
     /**
@@ -107,10 +106,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        $category->delete();
-
-        return redirect()->route('admin.categories.index')
-                        ->with('success','Category deleted successfully');
+        $tr = OrderProduct::find($id);
+        $tr->delete();
+        return redirect()->back()->with('success','Transaction deleted successfully.');
     }
 }

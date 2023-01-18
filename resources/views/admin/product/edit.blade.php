@@ -8,7 +8,7 @@
 @endpush
 
 @section('content')
-    {!! Form::model($dt, ['method' => 'PATCH', 'route' => ['admin.packages.update', $dt->id]]) !!}
+    {!! Form::model($dt, ['method' => 'PATCH', 'route' => ['admin.products.update', $dt->id]]) !!}
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Edit Data</h3>
@@ -34,14 +34,13 @@
                 <strong>Price:</strong>
                 {!! Form::number('price', null, array('required', 'min' => '0','placeholder' => 'Price','class' => 'form-control')) !!}
             </div>
-            <div class="form-group">
-                <strong>Qty:</strong>
-                {!! Form::number('qty', null, array('required', 'min' => '0','placeholder' => 'Qty','class' => 'form-control')) !!}
-            </div>
-            <div class="form-group">
-                <strong>Type:</strong>
-                {!! Form::text('type', null, array('required', 'placeholder' => 'Type','class' => 'form-control')) !!}
-            </div>
+            {{-- <div class="form-group">
+                <strong>Thumbnail:</strong>
+                <div class="custom-file">
+                    {!! Form::file('thumbnail', array('class' => 'custom-file-input')) !!}
+                    <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
+                </div>
+            </div> --}}
             <div class="form-group">
                 <strong>Detail:</strong>
                 {!! Form::text('body', null, array('required', 'placeholder' => 'Detail','class' => 'form-control')) !!}

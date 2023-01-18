@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class InstanController extends Controller
+class InstantController extends Controller
 {
     public function instan()
     {

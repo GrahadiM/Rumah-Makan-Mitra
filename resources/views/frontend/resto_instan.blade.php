@@ -43,7 +43,7 @@
                                                             <div class="row">
                                                                 <p class="card-text col-md-6"><b>{{ __('Rp.').number_format($item->price,2,',','.') }}</b></p>
                                                                 <div class="col-md-6">
-                                                                    <form action="{{ route('fe.post_cart') }}" method="post">
+                                                                    <form action="{{ route('fe.post_cart') }}" method="POST">
                                                                         @csrf
                                                                         <input type="hidden" name="product_id" value="{{ $item->id }}">
                                                                         <input type="hidden" name="type" value="instan">

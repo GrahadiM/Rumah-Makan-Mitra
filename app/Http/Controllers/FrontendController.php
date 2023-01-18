@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Models\OrderProduct;
 
 class FrontendController extends Controller
 {
@@ -69,7 +70,7 @@ class FrontendController extends Controller
         $data->phone = $request->phone;
         $data->save();
 
-        if($data != null) {
+        if($data != NULL) {
             Alert::success('Berhasil Ubah Profil');
             return back();
         } else {
@@ -113,9 +114,10 @@ class FrontendController extends Controller
         $atr = Cart::with('product', 'customer')->where([
 			['customer_id', Auth::user()->id],
 			['product_id', $request->product_id],
+            ['type', $request->type],
 		])->first();
 
-		$qty = $request->qty == null ? 1 : $request->qty;
+		$qty = $request->qty == NULL ? 1 : $request->qty;
 		$new = false;
 		if (!$atr) {
 			$atr = new Cart();
@@ -132,45 +134,49 @@ class FrontendController extends Controller
             $atr->qty = $atr->qty + $qty;
         }
 
-        if ($request->type == 'instan') {
-            $data = Address::with('user')->where([
-                ['user_id', Auth::user()->id],
-                ['type', 'UTAMA'],
-            ])->first();
+        $data = Address::with('user')->where([
+            ['user_id', Auth::user()->id],
+            ['type', 'UTAMA'],
+        ])->first();
 
-            if ($data == NULL || empty($data)) {
-                Alert::warning('Data Alamat Anda Kosong!');
-                return redirect()->route('fe.alamat');
-            }
-
-            $atr = Transaction::with('customer')->where([
-                ['customer_id', Auth::user()->id],
-                ['status', 'PENDING'],
-                ['type', $request->type],
-            ])->first();
-
-            $tgl_pesanan = $request->tgl_pesanan == null ? Carbon::now()->addDay() : $request->tgl_pesanan;
-            $new = false;
-            if (!$atr) {
-                $atr = new Transaction();
-                $new = true;
-            }
-
-            $atr->address_id = $data->id;
-            if ($new) {
-                $atr->kode_transaksi = 'TRX-' . mt_rand(00000, 99999);
-                $atr->customer_id = Auth::user()->id;
-                $atr->type = $request->type;
-                $atr->tgl_pesanan = $tgl_pesanan;
-            } else {
-                $atr->tgl_pesanan = $tgl_pesanan;
-            }
-            $atr->save();
+        if ($data == NULL || empty($data)) {
+            Alert::warning('Data Alamat Anda Kosong!');
+            return redirect()->route('fe.alamat');
         }
+
+        $tr = Transaction::with('customer')->where([
+            ['customer_id', Auth::user()->id],
+            ['status', 'PENDING'],
+            ['type', $request->type],
+        ])->first();
+
+        if ($request->type == 'instan') {
+            $tgl_pesanan = $request->tgl_pesanan == NULL ? Carbon::now() : $request->tgl_pesanan;
+        } else {
+            $tgl_pesanan = $request->tgl_pesanan == NULL ? Carbon::now()->addDay() : $request->tgl_pesanan;
+        }
+
+        $new = false;
+        if (!$tr) {
+            $tr = new Transaction();
+            $new = true;
+        }
+
+        $tr->address_id = $data->id;
+        if ($new) {
+            $tr->kode_transaksi = 'TRX-' . mt_rand(00000, 99999);
+            $tr->customer_id = Auth::user()->id;
+            $tr->type = $request->type;
+            $tr->tgl_pesanan = $tgl_pesanan;
+        } else {
+            $tr->tgl_pesanan = $tgl_pesanan;
+        }
+        $tr->save();
 
         $atr->save();
 
-        return redirect()->back()->with('Sukses', 'Data Berhasil Ditambahkan');
+        Alert::success('Data Berhasil Ditambahkan');
+        return back();
     }
 
     public function update_cart(Request $request, $id)
@@ -180,7 +186,8 @@ class FrontendController extends Controller
         $atr->qty = $request->qty;
         $atr->update();
 
-        return back()->with('Sukses', 'Data Berhasil Diubah');
+        Alert::success('Data Berhasil Diubah');
+        return back();
     }
 
     public function minus(Request $request, $id)
@@ -194,7 +201,8 @@ class FrontendController extends Controller
             $atr->save();
         }
 
-        return back()->with('Sukses', 'Data Berhasil Diubah');
+        Alert::success('Data Berhasil Diubah');
+        return back();
     }
 
     public function plus(Request $request, $id)
@@ -204,14 +212,16 @@ class FrontendController extends Controller
         $atr->qty = $request->qty;
         $atr->save();
 
-        return back()->with('Sukses', 'Data Berhasil Diubah');
+        Alert::success('Data Berhasil Diubah');
+        return back();
     }
 
     public function delete_cart($id)
     {
         Cart::destroy($id);
 
-        return back()->with('Sukses', 'Data Berhasil Dihapus');
+        Alert::success('Data Berhasil Dihapus');
+        return back();
     }
 
     public function update_note(Request $request, $id)
@@ -230,5 +240,45 @@ class FrontendController extends Controller
 
         Alert::success('Data Note Berhasil Diubah');
         return back();
+    }
+
+    public function pay(Request $request)
+    {
+        $atr = Transaction::with('customer')->where([
+			['customer_id', Auth::user()->id],
+			['status', 'PENDING'],
+            ['type', $request->type],
+            ['id', $request->id],
+		])->first();
+        $atr->total_harga = $request->total_harga;
+        $atr->status = 'PROSES';
+        $atr->update();
+
+        $carts = Cart::with('product')->where('customer_id', Auth::user()->id)->get();
+        foreach ($carts as $item) {
+
+            $op = new OrderProduct;
+            $op->transaction_id = $atr->id;
+            $op->product_id = $item->product->id;
+            $op->qty = $item->qty == NULL ? 1 : $item->qty;
+            $atr->type = $request->type;
+            $op->save();
+
+            Cart::destroy($item->id);
+        }
+
+        Alert::success('Silahkan Segera Proses Pembayaran Anda!');
+        return route('fe.invoice', $atr->id);
+    }
+
+    public function invoice(Request $request)
+    {
+        $data['transaksi'] = Transaction::with('customer')->where([
+			['customer_id', Auth::user()->id],
+            ['id', 1],
+		])->latest('id')->first();
+        $data['items'] = OrderProduct::where('transaction_id', $data['transaksi']->id)->get();
+
+        return view('frontend.invoice', $data);
     }
 }

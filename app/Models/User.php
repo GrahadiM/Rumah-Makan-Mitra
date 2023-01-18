@@ -50,7 +50,6 @@ class User extends Authenticatable
         return $this->firstname  .' '. $this->lastname;
     }
 
-
     public function getCreatedAtAttribute($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->translatedFormat('l, d/m/Y H:i');

@@ -100,14 +100,16 @@
                 <div class="row fw-bold mb-5">
                     <div class="col-md-10">
                         Total Harga
-                        <h5>{{ __('Rp.').number_format($total,2,',','.') }}</h5>
+                        <h5>{{ __('Rp.').number_format($total+($total*(10/100)),2,',','.') }}</h5>
                     </div>
                     <div class="col-md-2">
-                        @if (\Setting::getDay() == NULL)
-                            <form class="modal-body row" action="{{ route('fe.post_cart') }}" method="POST">
+                        <form class="modal-body row" action="{{ route('fe.pay') }}" method="POST">
+                            @method('PUT')
                             @csrf
-                        @endif
-                            <button type="submit" class="btn btn-dark">Pembayaran</button>
+                            <input type="hidden" name="id" value="{{ $adr->id }}">
+                            <input type="hidden" name="type" value="{{ $adr->type }}">
+                            <input type="hidden" name="total_harga" value="{{ $total+($total*(10/100)) }}">
+                            <button type="submit" class="btn btn-outline-dark">Pembayaran</button>
                         </form>
                     </div>
                 </div>

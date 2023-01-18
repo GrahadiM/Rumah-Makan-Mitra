@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -50,5 +51,34 @@ class UsersTableSeeder extends Seeder
         ];
         $roleUser->syncPermissions($permissions);
         $user->assignRole([$roleUser->id]);
+
+        Address::create([
+            'user_id' => 2,
+            'title' => strtoupper('Rumah Utama'),
+            'name' => 'Ranny',
+            'wa' => '85767113554',
+            'phone' => '85767113554',
+            'address' => strtoupper('Jl Paus Raya'),
+            'provinsi' => strtoupper('DKI JAKARTA'),
+            'kabupaten' => strtoupper('Jakarta Barat'),
+            'kecamatan' => strtoupper('Kebon Jeruk'),
+            'type' => strtoupper('UTAMA'),
+            'pos' => 11530,
+            'created_at' => now(),
+        ]);
+        Address::create([
+            'user_id' => 2,
+            'title' => strtoupper('Kantor'),
+            'name' => 'Ranny',
+            'wa' => '85767113554',
+            'phone' => '85767113554',
+            'address' => strtoupper('Jl Lumba Lumba'),
+            'provinsi' => strtoupper('DKI JAKARTA'),
+            'kabupaten' => strtoupper('Jakarta Barat'),
+            'kecamatan' => strtoupper('Kebon Jeruk'),
+            'type' => strtoupper('UMUM'),
+            'pos' => 11530,
+            'created_at' => now(),
+        ]);
     }
 }

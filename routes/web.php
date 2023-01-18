@@ -50,6 +50,8 @@ Route::middleware(['xss'])->group(function () {
                         Route::put('/cart/{id}', 'update_cart')->name('update_cart');
                         Route::delete('/cart/delete/{id}', 'delete_cart')->name('delete_cart');
                         Route::put('/update_note/{id}', 'update_note')->name('update_note');
+                        Route::put('/pay', 'pay')->name('pay');
+                        Route::get('/invoice', 'invoice')->name('invoice');
                     });
                 });
             });

@@ -25,20 +25,29 @@
                                         @forelse ($instan as $item)
                                             <div class="row mt-5">
                                                 <div class="col-md-2">
-                                                    <img src="assets/logo/logo-instant.png" class="img-fluid p-2" alt="logo">
+                                                    <img src="{{ asset('frontend/assets/img/menu/instant.png') }}" class="img-fluid p-2" alt="logo">
                                                 </div>
                                                 <div class="col-md-7">
                                                     <p class="card-text" style="color: #000;">
-                                                        Paket Nasi Ayam Gulai, Paket Nasi Rendang
+                                                        {{ $item->kode_transaksi }}
                                                         <br>
-                                                        Rp.52.800
+                                                        {{ $item->total_harga == NULL ? 'Rp.0' : __('Rp.').number_format($item->total_harga,2,',','.') }}
                                                         <br>
-                                                        2 menu
+                                                        {{ $item->note == NULL ? '' : $item->note }}
                                                     </p>
-                                                    <p class="text-muted">2 Januari 2023, 12:01</p>
+                                                    <p class="text-muted">{{ $item->created_at }}</p>
                                                 </div>
                                                 <div class="col-md-3 text-end">
-                                                    <button class="btn btn-sm rounded btn-outline-primary">Dalam Proses</button>
+                                                    @if ($item->status == 'PENDING')
+                                                        <button class="btn btn-sm rounded btn-outline-secondary">{{ $item->status }}</button>
+                                                    @elseif ($item->status == 'PROSES')
+                                                        <button class="btn btn-sm rounded btn-outline-warning">{{ $item->status }}</button>
+                                                    @elseif ($item->status == 'SUCCESS')
+                                                        <button class="btn btn-sm rounded btn-outline-succes">{{ $item->status }}</button>
+                                                    @else
+                                                        <button class="btn btn-sm rounded btn-outline-danger">{{ $item->status }}</button>
+                                                    @endif
+                                                    {{-- <button class="btn btn-sm rounded btn-outline-primary">Dalam Proses</button> --}}
                                                 </div>
                                             </div>
                                         @empty
@@ -103,14 +112,15 @@
                                         @forelse ($katering as $item)
                                             <div class="row mt-5">
                                                 <div class="col-md-2">
-                                                    <img src="assets/logo/logo-instant.png" class="img-fluid p-2" alt="logo">
+                                                    <img src="{{ asset('frontend/assets/img/menu/catering.png') }}" class="img-fluid p-2" alt="logo">
                                                 </div>
                                                 <div class="col-md-7">
                                                     <p class="card-text" style="color: #000;">
                                                         {{ $item->kode_transaksi }}
                                                         <br>
-                                                        {{ __('Rp.').number_format($item->product->price,2,',','.') }}
+                                                        {{ $item->total_harga == NULL ? 'Rp.0' : __('Rp.').number_format($item->total_harga,2,',','.') }}
                                                         <br>
+                                                        {{ $item->note == NULL ? '' : $item->note }}
                                                     </p>
                                                     <p class="text-muted">{{ $item->created_at }}</p>
                                                 </div>

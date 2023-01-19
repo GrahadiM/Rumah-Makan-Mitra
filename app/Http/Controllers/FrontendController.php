@@ -164,7 +164,7 @@ class FrontendController extends Controller
 
         $tr->address_id = $data->id;
         if ($new) {
-            $tr->kode_transaksi = 'TRX-' . mt_rand(00000, 99999);
+            $tr->kode_transaksi = 'TRX-' . mt_rand(00000, 99999).time();
             $tr->customer_id = Auth::user()->id;
             $tr->type = $request->type;
             $tr->tgl_pesanan = $tgl_pesanan;
@@ -244,6 +244,11 @@ class FrontendController extends Controller
 
     public function pay(Request $request, $id)
     {
+        Config::$serverKey = config('services.midtrans.serverKey');
+        Config::$isProduction = config('services.midtrans.isProduction');
+        Config::$isSanitized = config('services.midtrans.isSanitized');
+        Config::$is3ds = config('services.midtrans.is3ds');
+
         // dd($request->all());
         // $atr = Transaction::with('customer')->where([
 		// 	['customer_id', Auth::user()->id],
@@ -252,8 +257,9 @@ class FrontendController extends Controller
         //     ['id', $request->id],
 		// ])->latest('id')->first();
         $atr = Transaction::with('customer')->find($id);
-        $atr->total_harga = $request->total_harga;
+        $atr->total_harga = (int) $request->total_harga;
         $atr->status = 'PROSES';
+        $atr->snap_token = $request->snap_token == NULL ? mt_rand(00000, 99999).time() : $request->snap_token;
         $atr->update();
 
         $carts = Cart::with('product')->where('customer_id', Auth::user()->id)->get();

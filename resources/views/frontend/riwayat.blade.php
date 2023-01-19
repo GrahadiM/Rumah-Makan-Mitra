@@ -25,7 +25,7 @@
                                         @forelse ($instan as $item)
                                             <div class="row mt-5">
                                                 <div class="col-md-2">
-                                                    <img src="{{ asset('frontend/assets/img/menu/instant.png') }}" class="img-fluid p-2" alt="logo">
+                                                    <img src="{{ asset('frontend/assets/img/menu/instant.png') }}" class="img-fluid p-1" alt="logo">
                                                 </div>
                                                 <div class="col-md-7">
                                                     <p class="card-text" style="color: #000;">
@@ -33,19 +33,28 @@
                                                         <br>
                                                         {{ $item->total_harga == NULL ? 'Rp.0' : __('Rp.').number_format($item->total_harga,2,',','.') }}
                                                         <br>
-                                                        {{ $item->note == NULL ? '' : $item->note }}
+                                                        Note : <b>{{ $item->note == NULL ? '-' : $item->note }}</b>
                                                     </p>
                                                     <p class="text-muted">{{ $item->created_at }}</p>
                                                 </div>
                                                 <div class="col-md-3 text-end">
                                                     @if ($item->status == 'PENDING')
-                                                        <button class="btn btn-sm rounded btn-outline-secondary">{{ $item->status }}</button>
+                                                        <button class="btn btn-sm rounded btn-outline-secondary mb-2">{{ $item->status }}</button>
                                                     @elseif ($item->status == 'PROSES')
-                                                        <button class="btn btn-sm rounded btn-outline-warning">{{ $item->status }}</button>
+                                                        <button class="btn btn-sm rounded btn-outline-warning mb-2">{{ $item->status }}</button>
                                                     @elseif ($item->status == 'SUCCESS')
-                                                        <button class="btn btn-sm rounded btn-outline-success">{{ $item->status }}</button>
+                                                        <button class="btn btn-sm rounded btn-outline-success mb-2">{{ $item->status }}</button>
                                                     @else
-                                                        <button class="btn btn-sm rounded btn-outline-danger">{{ $item->status }}</button>
+                                                        <button class="btn btn-sm rounded btn-outline-danger mb-2">{{ $item->status }}</button>
+                                                    @endif
+                                                    @if ($item->payment_status == 1)
+                                                        <button class="btn btn-sm rounded btn-outline-secondary">Menunggu Pembayaran</button>
+                                                    @elseif ($item->payment_status == 2)
+                                                        <button class="btn btn-sm rounded btn-outline-warning">Sudah Dibayar</button>
+                                                    @elseif ($item->payment_status == 3)
+                                                        <button class="btn btn-sm rounded btn-outline-success">Kadaluarsa</button>
+                                                    @else
+                                                        <button class="btn btn-sm rounded btn-outline-danger">Kadaluarsa</button>
                                                     @endif
                                                     {{-- <button class="btn btn-sm rounded btn-outline-primary">Dalam Proses</button> --}}
                                                 </div>
@@ -53,60 +62,6 @@
                                         @empty
                                             <div class="text-center fw-bold mt-5">Tidak Ada Riwayat Pesanan Instan!</div>
                                         @endforelse
-                                        {{-- <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <img src="assets/logo/logo-instant.png" class="img-fluid p-2" alt="logo">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p class="card-text" style="color: #000;">
-                                                    Paket Nasi Ayam Gulai, Paket Nasi Rendang
-                                                    <br>
-                                                    Rp.52.800
-                                                    <br>
-                                                    2 menu
-                                                </p>
-                                                <p class="text-muted">2 Januari 2023, 12:01</p>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-sm rounded btn-outline-primary">Dalam Proses</button>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <img src="assets/logo/logo-instant.png" class="img-fluid p-2" alt="logo">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p class="card-text" style="color: #000;">
-                                                    Paket Nasi Ayam Gulai, Paket Nasi Rendang
-                                                    <br>
-                                                    Rp.52.800
-                                                    <br>
-                                                    2 menu
-                                                </p>
-                                                <p class="text-muted">2 Januari 2023, 12:01</p>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-sm rounded btn-outline-danger">Review</button>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <img src="assets/logo/logo-instant.png" class="img-fluid p-2" alt="logo">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p class="card-text" style="color: #000;">
-                                                    Paket Nasi Ayam Gulai, Paket Nasi Rendang
-                                                    <br>
-                                                    Rp.52.800
-                                                    <br>
-                                                    2 menu
-                                                </p>
-                                                <p class="text-muted">2 Januari 2023, 12:01</p>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-sm rounded btn-outline-secondary">Selesai</button>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                                         @forelse ($katering as $item)
@@ -140,78 +95,6 @@
                                         @empty
                                             <div class="text-center fw-bold mt-5">Tidak Ada Riwayat Pesanan Katering!</div>
                                         @endforelse
-                                        {{-- <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <img src="assets/logo/logo-katering.png" class="img-fluid p-2" alt="logo">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p class="card-text" style="color: #000;">
-                                                    Paket Nasi Ayam Gulai, Paket Nasi Rendang
-                                                    <br>
-                                                    Rp.52.800
-                                                    <br>
-                                                    2 menu
-                                                </p>
-                                                <p class="text-muted">2 Januari 2023, 12:01</p>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-sm rounded btn-outline-primary">Dalam Proses</button>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <img src="assets/logo/logo-katering.png" class="img-fluid p-2" alt="logo">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p class="card-text" style="color: #000;">
-                                                    Paket Nasi Ayam Gulai, Paket Nasi Rendang
-                                                    <br>
-                                                    Rp.52.800
-                                                    <br>
-                                                    2 menu
-                                                </p>
-                                                <p class="text-muted">2 Januari 2023, 12:01</p>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-sm rounded btn-outline-danger">Review</button>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <img src="assets/logo/logo-katering.png" class="img-fluid p-2" alt="logo">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p class="card-text" style="color: #000;">
-                                                    Paket Nasi Ayam Gulai, Paket Nasi Rendang
-                                                    <br>
-                                                    Rp.52.800
-                                                    <br>
-                                                    2 menu
-                                                </p>
-                                                <p class="text-muted">2 Januari 2023, 12:01</p>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-sm rounded btn-outline-secondary">Selesai</button>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <img src="assets/logo/logo-katering.png" class="img-fluid p-2" alt="logo">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p class="card-text" style="color: #000;">
-                                                    Paket Nasi Ayam Gulai, Paket Nasi Rendang
-                                                    <br>
-                                                    Rp.52.800
-                                                    <br>
-                                                    2 menu
-                                                </p>
-                                                <p class="text-muted">2 Januari 2023, 12:01</p>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-sm rounded btn-outline-warning">Batal</button>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

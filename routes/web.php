@@ -35,7 +35,6 @@ Route::middleware(['xss'])->group(function () {
                         Route::get('/resto-instan', 'resto_instan')->name('resto_instan');
                         Route::get('/cart-instan', 'cart_instan')->name('cart_instan');
                     });
-
                     Route::middleware(['alamat'])->group(function () {
                         Route::get('/akun', 'akun')->name('akun');
                         Route::put('/akun', 'update_akun')->name('update_akun');
@@ -52,6 +51,9 @@ Route::middleware(['xss'])->group(function () {
                         Route::put('/update_note/{id}', 'update_note')->name('update_note');
                         Route::put('/pay/{id}', 'pay')->name('pay');
                         Route::get('/invoice/{id}', 'invoice')->name('invoice');
+
+                        Route::resource('orders', App\Http\Controllers\OrderController::class)->only(['index', 'show']);
+                        Route::post('payments/midtrans-notification', [App\Http\Controllers\PaymentCallbackController::class, 'receive']);
                     });
                 });
             });

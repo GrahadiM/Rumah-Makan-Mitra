@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Transaction;
+use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +16,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        // dd(mt_rand(00000, 99999).time());
+        $orders = Transaction::all();
+
+        return view('frontend.orders.index', compact('orders'));
     }
 
     /**
@@ -41,12 +46,23 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param  \App\Models\Transaction  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Transaction $order)
     {
-        //
+        $snapToken = $order->snap_token == NULL ? mt_rand(00000, 99999).time() : $order->snap_token;
+        if (is_null($snapToken)) {
+            // Jika snap token masih NULL, buat token snap dan simpan ke database
+
+            $midtrans = new CreateSnapTokenService($order);
+            $snapToken = $midtrans->getSnapToken();
+
+            $order->snap_token = $snapToken;
+            $order->save();
+        }
+
+        return view('frontend.orders.show', compact('order', 'snapToken'));
     }
 
     /**

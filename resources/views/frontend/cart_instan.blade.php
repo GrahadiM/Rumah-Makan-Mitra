@@ -108,7 +108,7 @@
                             <input type="hidden" name="id" value="{{ $adr->id }}">
                             <input type="hidden" name="total_harga" value="{{ $total+($total*(10/100)) }}">
                             <input type="hidden" name="type" value="{{ $adr->type }}">
-                            <button type="submit" class="btn btn-outline-dark" {{ \Setting::getDisable() }}>Pembayaran</button>
+                            <button type="submit" class="btn btn-outline-dark" {{ \Setting::getDisable() }} {{ $total = 0 ? 'disabled' : '' }}>Pembayaran</button>
                         </form>
                     </div>
                 </div>

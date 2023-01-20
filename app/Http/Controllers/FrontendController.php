@@ -31,7 +31,12 @@ class FrontendController extends Controller
                 $data = $item;
             }
         }
-        return response() -> json(['status' => 200, 'posts' => $data]);
+        return response()
+        ->withHeaders([
+            'Content-Type' => 'text/xml',
+            'X-Header-One' => 'Header Value'
+        ])->json(['status' => 200, 'posts' => $data]);
+        // return response();
     }
 
     public function index()

@@ -23,21 +23,6 @@ use App\Models\OrderProduct;
 
 class FrontendController extends Controller
 {
-    public function list()
-    {
-        $products = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
-        foreach($products as $name => $product) {
-            foreach($product as $item) {
-                $data = $item;
-            }
-        }
-        $response = [
-            'success' => true,
-            'data'    => $data,
-            'message' => 'success',
-        ];
-        return response()->json($response, 200);
-    }
 
     public function index()
     {

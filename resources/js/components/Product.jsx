@@ -6,7 +6,7 @@ import axios from "axios";
 
 class Product extends Component {
     async componentDidMount() {
-        const res = await axios.get("http://localhost:8000/list");
+        const res = await axios.get("http://127.0.0.1:8000/list");
         console.log(res);
     }
 

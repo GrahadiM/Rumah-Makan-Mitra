@@ -9479,7 +9479,7 @@ var Product = /*#__PURE__*/function (_Component) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("http://localhost:8000/list");
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("http://127.0.0.1:8000/list");
             case 2:
               res = _context.sent;
               console.log(res);

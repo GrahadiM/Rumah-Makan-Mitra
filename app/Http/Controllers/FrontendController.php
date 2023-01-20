@@ -31,12 +31,12 @@ class FrontendController extends Controller
                 $data = $item;
             }
         }
-        return response()
-        ->withHeaders([
-            'Content-Type' => 'text/xml',
-            'X-Header-One' => 'Header Value'
-        ])->json(['status' => 200, 'posts' => $data]);
-        // return response();
+        $response = [
+            'success' => true,
+            'data'    => $data,
+            'message' => 'success',
+        ];
+        return response()->json($response, 200);
     }
 
     public function index()

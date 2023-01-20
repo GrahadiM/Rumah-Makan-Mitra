@@ -1,27 +1,45 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 // {{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}
 
-// Cara 1
-function Product() {
-    return (
-        <div className="col-md-6 col-lg-3 mb-5">
-            <a data-bs-toggle="modal" data-bs-target="#cart" className="text-decoration-none">
-                <div className="card card-product">
-                    <img src="" className="card-img-top img-fluid" alt="..." />
+class Product extends Component {
+    async componentDidMount() {
+        const res = await axios.get("http://localhost:8000/list");
+        console.log(res);
+    }
 
-                    <div className="card-body text-dark">
-                        <h5 className="card-title">Nama</h5>
-                        <p className="card-text">Deskripsi</p>
-                        <div className="text-dark">
-                            <i className="fas fa-star star-active"></i> 4.7
+    render() {
+        return (
+            <div className="col-md-6 col-lg-3 mb-5">
+                <a
+                    data-bs-toggle="modal"
+                    data-bs-target="#cart"
+                    className="text-decoration-none"
+                >
+                    <div className="card card-product">
+                        <img
+                            src=""
+                            className="card-img-top img-fluid"
+                            alt="..."
+                        />
+
+                        <div className="card-body text-dark">
+                            <h5 className="card-title">Nama</h5>
+                            <p className="card-text">Deskripsi</p>
+                            <div className="text-dark">
+                                <i className="fas fa-star star-active"></i> 4.7
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-    );
+                </a>
+            </div>
+        );
+    }
 }
+
+// Cara 1
 
 // Cara 2
 // const containers = [{name: '', thumbnail: '', body: ''}]
@@ -74,6 +92,6 @@ function Product() {
 
 export default Product;
 
-if (document.getElementById('product')) {
-    ReactDOM.render(<Product />, document.getElementById('product'));
+if (document.getElementById("product")) {
+    ReactDOM.render(<Product />, document.getElementById("product"));
 }

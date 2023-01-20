@@ -66,6 +66,8 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'json.response' => \App\Http\Middleware\ForceJsonResponse::class,
+        'cors' => \App\Http\Middleware\Cors::class,
         'xss' => \App\Http\Middleware\XSSProtection::class,
         'alamat' => \App\Http\Middleware\Alamat::class,
         'transaksi' => \App\Http\Middleware\TransactionMiddleware::class,

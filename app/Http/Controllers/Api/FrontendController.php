@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Http\Resources\Product as ProductResource;
+use App\Http\Resources\ProductResource;
 
 class FrontendController extends BaseController
 {

@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(App\Http\Controllers\Api\FrontendController::class)->group(function () {
-    Route::get('/list', 'list')->name('list');
+Route::group(['middleware' => ['cors', 'json.response']], function () {
+    Route::controller(App\Http\Controllers\Api\FrontendController::class)->group(function () {
+        Route::get('/list', 'list')->name('list');
+    });
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

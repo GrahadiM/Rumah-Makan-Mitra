@@ -9447,8 +9447,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -9456,19 +9454,90 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
 // {{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}
+
+// class Product extends Component {
+//     state = {
+//         products: [],
+//         loading: true,
+//     };
+
+//     async componentDidMount() {
+//         // console.log("test");
+//         const res = await axios.get("http://127.0.0.1:8000/list");
+//         // console.log(res);
+//         if (res.status === 200) {
+//             // console.log("okat");
+//             this.setState({
+//                 products: res.data.products,
+//                 loading: false,
+//             });
+//             console.log(this.state.loading);
+//         }
+//     }
+
+//     render() {
+//         var productsLoading = "";
+//         if (this.state.loading) {
+//             productsLoading = <div>Loading..</div>;
+//         } else {
+//             productsLoading = "";
+//             this.state.products.map((item) => {
+//                 return (
+//                     <div className="col-md-6 col-lg-3 mb-5">
+//                         <a
+//                             data-bs-toggle="modal"
+//                             data-bs-target="#cart"
+//                             className="text-decoration-none"
+//                         >
+//                             <div className="card card-product">
+//                                 <img
+//                                     src={item.thumbnail}
+//                                     className="card-img-top img-fluid"
+//                                     alt={item.name}
+//                                 />
+
+//                                 <div className="card-body text-dark">
+//                                     <h5 className="card-title">{item.name}</h5>
+//                                     <p className="card-text">{item.body}</p>
+//                                     <div className="text-dark">
+//                                         <i className="fas fa-star star-active"></i>{" "}
+//                                         4.7
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         </a>
+//                     </div>
+//                 );
+//             });
+//         }
+//     }
+// }
+
+// Cara 1
 
 
 var Product = /*#__PURE__*/function (_Component) {
   _inherits(Product, _Component);
   var _super = _createSuper(Product);
   function Product() {
+    var _this;
     _classCallCheck(this, Product);
-    return _super.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    _this = _super.call.apply(_super, [this].concat(args));
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      products: [],
+      loading: true
+    });
+    return _this;
   }
   _createClass(Product, [{
     key: "componentDidMount",
@@ -9482,12 +9551,26 @@ var Product = /*#__PURE__*/function (_Component) {
               return axios__WEBPACK_IMPORTED_MODULE_2___default().get("http://127.0.0.1:8000/list");
             case 2:
               res = _context.sent;
-              console.log(res);
-            case 4:
+              if (!(res.status === 200)) {
+                _context.next = 11;
+                break;
+              }
+              _context.t0 = this;
+              _context.next = 7;
+              return res.data.products;
+            case 7:
+              _context.t1 = _context.sent;
+              _context.t2 = {
+                products: _context.t1,
+                loading: false
+              };
+              _context.t0.setState.call(_context.t0, _context.t2);
+              console.log(this.state.loading);
+            case 11:
             case "end":
               return _context.stop();
           }
-        }, _callee);
+        }, _callee, this);
       }));
       function componentDidMount() {
         return _componentDidMount.apply(this, arguments);
@@ -9497,40 +9580,52 @@ var Product = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "col-md-6 col-lg-3 mb-5",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-          "data-bs-toggle": "modal",
-          "data-bs-target": "#cart",
-          className: "text-decoration-none",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "card card-product",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-              src: "",
-              className: "card-img-top img-fluid",
-              alt: "..."
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-              className: "card-body text-dark",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
-                className: "card-title",
-                children: "Nama"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-                className: "card-text",
-                children: "Deskripsi"
+      var productsLoading = "";
+      if (this.state.loading) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: "Loading.."
+        });
+      } else if (this.state.loading === false) {
+        console.log(this.state.products);
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-md-6 col-lg-3 mb-5",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            "data-bs-toggle": "modal",
+            "data-bs-target": "#cart",
+            className: "text-decoration-none",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "card card-product",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+                src: this.state.products.thumbnail,
+                className: "card-img-top img-fluid",
+                alt: this.state.products.name
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "text-dark",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-                  className: "fas fa-star star-active"
-                }), " 4.7"]
+                className: "card-body text-dark",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
+                  className: "card-title",
+                  children: this.state.products.name
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                  className: "card-text",
+                  children: this.state.products.body
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "text-dark",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+                    className: "fas fa-star star-active"
+                  }), " ", "4.7"]
+                })]
               })]
-            })]
+            })
           })
-        })
-      });
+        });
+      }
+      //     productsLoading = "";
+      // this.state.products.map((item) => {
     }
+    // );
   }]);
   return Product;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component); // Cara 1
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component); // }
+// }
 // Cara 2
 // const containers = [{name: '', thumbnail: '', body: ''}]
 // // const containers = []

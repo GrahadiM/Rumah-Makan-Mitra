@@ -1,45 +1,132 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
 // {{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}
 
+// class Product extends Component {
+//     state = {
+//         products: [],
+//         loading: true,
+//     };
+
+//     async componentDidMount() {
+//         // console.log("test");
+//         const res = await axios.get("http://127.0.0.1:8000/list");
+//         // console.log(res);
+//         if (res.status === 200) {
+//             // console.log("okat");
+//             this.setState({
+//                 products: res.data.products,
+//                 loading: false,
+//             });
+//             console.log(this.state.loading);
+//         }
+//     }
+
+//     render() {
+//         var productsLoading = "";
+//         if (this.state.loading) {
+//             productsLoading = <div>Loading..</div>;
+//         } else {
+//             productsLoading = "";
+//             this.state.products.map((item) => {
+//                 return (
+//                     <div className="col-md-6 col-lg-3 mb-5">
+//                         <a
+//                             data-bs-toggle="modal"
+//                             data-bs-target="#cart"
+//                             className="text-decoration-none"
+//                         >
+//                             <div className="card card-product">
+//                                 <img
+//                                     src={item.thumbnail}
+//                                     className="card-img-top img-fluid"
+//                                     alt={item.name}
+//                                 />
+
+//                                 <div className="card-body text-dark">
+//                                     <h5 className="card-title">{item.name}</h5>
+//                                     <p className="card-text">{item.body}</p>
+//                                     <div className="text-dark">
+//                                         <i className="fas fa-star star-active"></i>{" "}
+//                                         4.7
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         </a>
+//                     </div>
+//                 );
+//             });
+//         }
+//     }
+// }
+
+// Cara 1
+
 class Product extends Component {
+    state = {
+        products: [],
+        loading: true,
+    };
+
     async componentDidMount() {
+        // console.log("test");
         const res = await axios.get("http://127.0.0.1:8000/list");
-        console.log(res);
+        // console.log(res);
+        if (res.status === 200) {
+            // console.log("okat");
+            this.setState({
+                products: await res.data.products,
+                loading: false,
+            });
+            console.log(this.state.loading);
+        }
     }
 
     render() {
-        return (
-            <div className="col-md-6 col-lg-3 mb-5">
-                <a
-                    data-bs-toggle="modal"
-                    data-bs-target="#cart"
-                    className="text-decoration-none"
-                >
-                    <div className="card card-product">
-                        <img
-                            src=""
-                            className="card-img-top img-fluid"
-                            alt="..."
-                        />
+        var productsLoading = "";
+        if (this.state.loading) {
+            return <div>Loading..</div>;
+        } else if (this.state.loading === false) {
+            console.log(this.state.products);
+            return (
+                <div className="col-md-6 col-lg-3 mb-5">
+                    <a
+                        data-bs-toggle="modal"
+                        data-bs-target="#cart"
+                        className="text-decoration-none"
+                    >
+                        <div className="card card-product">
+                            <img
+                                src={this.state.products.thumbnail}
+                                className="card-img-top img-fluid"
+                                alt={this.state.products.name}
+                            />
 
-                        <div className="card-body text-dark">
-                            <h5 className="card-title">Nama</h5>
-                            <p className="card-text">Deskripsi</p>
-                            <div className="text-dark">
-                                <i className="fas fa-star star-active"></i> 4.7
+                            <div className="card-body text-dark">
+                                <h5 className="card-title">
+                                    {this.state.products.name}
+                                </h5>
+                                <p className="card-text">
+                                    {this.state.products.body}
+                                </p>
+                                <div className="text-dark">
+                                    <i className="fas fa-star star-active"></i>{" "}
+                                    4.7
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-        );
+                    </a>
+                </div>
+            );
+        }
+        //     productsLoading = "";
+        // this.state.products.map((item) => {
     }
+    // );
 }
-
-// Cara 1
+// }
+// }
 
 // Cara 2
 // const containers = [{name: '', thumbnail: '', body: ''}]

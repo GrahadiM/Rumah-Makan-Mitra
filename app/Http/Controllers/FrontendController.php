@@ -33,7 +33,7 @@ class FrontendController extends Controller
         }
         $response = [
             'success' => true,
-            'data'    => $data,
+            'products' => $data,
             'message' => 'success',
         ];
         return response()->json($response, 200);

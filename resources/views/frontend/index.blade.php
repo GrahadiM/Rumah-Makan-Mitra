@@ -208,9 +208,9 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Favorite Grid Items-->
-                <div class="row justify-content-center">
-                    @if (count($product)>0)
-                        @forelse ($product as $item)
+                {{-- <div class=""> --}}
+                {{-- @if (count($product)>0)
+                        @forelse ($product as $item) --}}
                             <div id="product">
                             </div>
                             <!-- Favorite Item -->
@@ -228,10 +228,10 @@
                                     </div>
                                 </a>
                             </div> --}} -->
-                        @empty
+                        {{-- @empty
                             Maaf, Data Belum Tersedia!
                         @endforelse
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </section>

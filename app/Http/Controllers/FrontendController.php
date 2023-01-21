@@ -25,12 +25,13 @@ class FrontendController extends Controller
 {
     public function list()
     {
-        $products = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
-        foreach($products as $name => $product) {
-            foreach($product as $item) {
-                $data = $item;
-            }
-        }
+        $data = Product::all();
+        // $products = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
+        // foreach($products as $name => $product) {
+        //     foreach($product as $item) {
+        //         $data = $item;
+        //     }
+        // }
         $response = [
             'success' => true,
             'products' => $data,

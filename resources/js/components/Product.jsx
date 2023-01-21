@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 // {{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}
+
+// Cara 1
 
 // class Product extends Component {
 //     state = {
@@ -16,7 +18,7 @@ import axios from "axios";
 //         if (res.status === 200) {
 //             // console.log("okat");
 //             this.setState({
-//                 products: res.data.products,
+//                 products: await res.data.products,
 //                 loading: false,
 //             });
 //             console.log(this.state.loading);
@@ -24,14 +26,12 @@ import axios from "axios";
 //     }
 
 //     render() {
-//         var productsLoading = "";
 //         if (this.state.loading) {
-//             productsLoading = <div>Loading..</div>;
-//         } else {
-//             productsLoading = "";
-//             this.state.products.map((item) => {
+//             return <div>Loading..</div>;
+//         } else if (this.state.loading === false) {
+//             Object.entries(this.products).map(([key,value])) => {
 //                 return (
-//                     <div className="col-md-6 col-lg-3 mb-5">
+//                     <div key={key} className="col-md-6 col-lg-3 mb-5">
 //                         <a
 //                             data-bs-toggle="modal"
 //                             data-bs-target="#cart"
@@ -39,7 +39,7 @@ import axios from "axios";
 //                         >
 //                             <div className="card card-product">
 //                                 <img
-//                                     src={item.thumbnail}
+//                                     src={products.thumbnail}
 //                                     className="card-img-top img-fluid"
 //                                     alt={item.name}
 //                                 />
@@ -58,75 +58,60 @@ import axios from "axios";
 //                 );
 //             });
 //         }
+//         //     productsLoading = "";
+//         // this.state.products.map((item) => {
 //     }
+//     // );
+// }
+// }
 // }
 
-// Cara 1
+function Product() {
+    const [products, setProducts] = useState([]);
 
-class Product extends Component {
-    state = {
-        products: [],
-        loading: true,
-    };
+    useEffect(() => {
+        axios.get("http://127.0.0.1:8000/list").then(({ data }) => {
+            setProducts(data.products);
+        });
+    }, []);
+    return (
+        <div className="row justify-content-center">
+            {products.map((product) => {
+                return (
+                    <div className="col-md-6 col-lg-3 mb-5" key={product.id}>
+                        <a
+                            data-bs-toggle="modal"
+                            data-bs-target="#cart"
+                            className="text-decoration-none"
+                        >
+                            <div className="card card-product">
+                                <img
+                                    src={
+                                        "frontend/assets/img/product/" +
+                                        product.thumbnail
+                                    }
+                                    className="card-img-top img-fluid"
+                                    alt={product.name}
+                                />
 
-    async componentDidMount() {
-        // console.log("test");
-        const res = await axios.get("http://127.0.0.1:8000/list");
-        // console.log(res);
-        if (res.status === 200) {
-            // console.log("okat");
-            this.setState({
-                products: await res.data.products,
-                loading: false,
-            });
-            console.log(this.state.loading);
-        }
-    }
-
-    render() {
-        var productsLoading = "";
-        if (this.state.loading) {
-            return <div>Loading..</div>;
-        } else if (this.state.loading === false) {
-            console.log(this.state.products);
-            return (
-                <div className="col-md-6 col-lg-3 mb-5">
-                    <a
-                        data-bs-toggle="modal"
-                        data-bs-target="#cart"
-                        className="text-decoration-none"
-                    >
-                        <div className="card card-product">
-                            <img
-                                src={this.state.products.thumbnail}
-                                className="card-img-top img-fluid"
-                                alt={this.state.products.name}
-                            />
-
-                            <div className="card-body text-dark">
-                                <h5 className="card-title">
-                                    {this.state.products.name}
-                                </h5>
-                                <p className="card-text">
-                                    {this.state.products.body}
-                                </p>
-                                <div className="text-dark">
-                                    <i className="fas fa-star star-active"></i>{" "}
-                                    4.7
+                                <div className="card-body text-dark">
+                                    <h5 className="card-title">
+                                        {product.name}
+                                    </h5>
+                                    <p className="card-text">{product.body}</p>
+                                    <div className="text-dark">
+                                        <i className="fas fa-star star-active"></i>{" "}
+                                        4.7
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            );
-        }
-        //     productsLoading = "";
-        // this.state.products.map((item) => {
-    }
-    // );
+                        </a>
+                    </div>
+                );
+            })}
+        </div>
+    );
 }
-// }
-// }
 
 // Cara 2
 // const containers = [{name: '', thumbnail: '', body: ''}]

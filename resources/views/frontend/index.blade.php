@@ -214,7 +214,7 @@
                             <div id="product">
                             </div>
                             <!-- Favorite Item -->
-                            <!-- {{-- <div class="col-md-6 col-lg-3 mb-5">
+                            <div class="col-md-6 col-lg-3 mb-5">
                                 <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
                                     <div class="card card-product">
                                         <img src="{{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}" class="card-img-top img-fluid" alt="...">
@@ -227,7 +227,7 @@
                                         </div>
                                     </div>
                                 </a>
-                            </div> --}} -->
+                            </div>
                         @empty
                             Maaf, Data Belum Tersedia!
                         @endforelse
@@ -236,7 +236,7 @@
             </div>
         </section>
     @empty
-
+        Maaf, Data Belum Tersedia!
     @endforelse
 
     @include('layouts.fe.modal.menu')

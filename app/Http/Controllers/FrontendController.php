@@ -61,6 +61,13 @@ class FrontendController extends Controller
         return view('frontend.index', $data);
     }
 
+    public function instan($id)
+    {
+        $data['title'] = 'Instant Order';
+        $data['products'] = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
+        return view('frontend.category', $data);
+    }
+
     public function akun()
     {
         $data['title'] = 'Ubah Profile';
@@ -113,6 +120,12 @@ class FrontendController extends Controller
     {
         $data['title'] = 'Bantuan';
         return view('frontend.bantuan', $data);
+    }
+
+    public function review()
+    {
+        $data['title'] = 'Nilai dan Ulasan';
+        return view('frontend.review', $data);
     }
 
     public function post_cart(Request $request)

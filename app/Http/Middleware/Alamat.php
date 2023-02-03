@@ -22,7 +22,7 @@ class Alamat
             ['user_id', Auth::user()->id],
             ['type', 'UTAMA'],
         ])->get();
-        if (!$tr) {
+        if (!$tr || empty($tr) || $tr == NULL) {
             return redirect()->route('fe.alamat');
         }
         return $next($request);

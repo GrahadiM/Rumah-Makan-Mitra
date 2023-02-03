@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $tr = Address::where([
+            ['user_id', Auth::user()->id],
+            ['type', 'UTAMA'],
+        ])->get();
         if (auth()->user()->hasRole('admin')) {
             return view('admin.dashboard.index',[
                 'title' => 'Dashboard',
@@ -31,7 +37,11 @@ class HomeController extends Controller
             ]);
         }
         elseif (auth()->user()->hasRole('customer')) {
-            return redirect()->route('fe.alamat');
+            if (empty($tr) || $tr == NULL) {
+                return redirect()->route('fe.alamat');
+            } else {
+                return redirect()->route('fe.index');
+            }
         }
         else {
             return redirect()->route('fe.index');

@@ -18,7 +18,7 @@ class AddressController extends Controller
         // $data['districts'] = District::all();
         // $data['villages'] = Village::all();
         $data['title'] = 'Alamat';
-        $data['items'] = Address::all();
+        $data['items'] = Address::with('user', 'customer')->where('user_id', Auth::user()->id)->get();
         return view('frontend.alamat', $data);
     }
 

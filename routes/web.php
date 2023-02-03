@@ -11,6 +11,7 @@ Route::middleware(['xss'])->group(function () {
         Route::controller(App\Http\Controllers\FrontendController::class)->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/list', 'list')->name('list');
+            Route::get('/review', 'review')->name('review');
             Route::middleware(['auth'])->group(function () {
                 Route::get('/category/{id}', 'category')->name('category');
 

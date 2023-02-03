@@ -47,15 +47,13 @@
                         <!-- Portfolio Item -->
                         <div class="col-6 col-lg-3 mb-5 mt-5">
                             <a href="{{ route('fe.instan') }}" class="text-decoration-none">
-                                <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/menu/instant-logo.png"
-                                    alt="..." />
+                                <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/menu/instant-logo.png" alt="..." />
                             </a>
                         </div>
                         <!-- Portfolio Item -->
                         <div class="col-6 col-lg-3 mb-5 mt-5">
                             <a href="{{ route('fe.catering') }}" class="text-decoration-none">
-                                <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/menu/catering-logo.png"
-                                    alt="..." />
+                                <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/menu/catering-logo.png" alt="..." />
                             </a>
                         </div>
                     </div>
@@ -70,36 +68,32 @@
             <div class="row justify-content-center">
                 <!-- Portfolio Item -->
                 <div class="col-6 col-category mb-5 mt-5">
-                    <a href="">
-                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/makanan_berat.png"
-                            alt="..." />
+                    <a href="{{ url('/') }}/#makanan-berat">
+                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/makanan_berat.png" alt="Thumbnail" />
                     </a>
                 </div>
                 <!-- Portfolio Item -->
                 <div class="col-6 col-category mb-5 mt-5">
-                    <a href="">
-                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/minuman.png"
-                            alt="..." />
+                    <a href="{{ url('/') }}/#makanan-ringan">
+                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/makanan_ringan.png" alt="Thumbnail" />
                     </a>
                 </div>
                 <!-- Portfolio Item -->
                 <div class="col-6 col-category mb-5 mt-5">
-                    <a href="">
-                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/lauk.png" alt="..." />
+                    <a href="{{ url('/') }}/#lauk-pauk">
+                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/lauk.png" alt="Thumbnail" />
                     </a>
                 </div>
                 <!-- Portfolio Item -->
                 <div class="col-6 col-category mb-5 mt-5">
-                    <a href="">
-                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/makanan_ringan.png"
-                            alt="..." />
+                    <a href="{{ url('/') }}/#sayuran">
+                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/sayuran.png" alt="Thumbnail" />
                     </a>
                 </div>
                 <!-- Portfolio Item -->
                 <div class="col-6 col-category mb-5 mt-5">
-                    <a href="">
-                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/sayuran.png"
-                            alt="..." />
+                    <a href="{{ url('/') }}/#minuman">
+                        <img class="img-fluid" src="{{ asset('frontend') }}/assets/img/category/minuman.png" alt="Thumbnail" />
                     </a>
                 </div>
             </div>
@@ -193,7 +187,7 @@
 
     @forelse ($products as $name => $product)
         <!-- Favorite Section-->
-        <section class="page-section portfolio" id="portfolio">
+        <section class="page-section portfolio" id="{{ Str::slug($name) }}">
             <div class="container">
                 <!-- Favorite Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{ $name }}</h2>
@@ -208,13 +202,12 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Favorite Grid Items-->
-                <div class="">
+                <div class="row">
                 @if (count($product)>0)
                         @forelse ($product as $item)
-                            <div id="product">
-                            </div>
+                            {{-- <div id="product"></div> --}}
                             <!-- Favorite Item -->
-                            {{-- <div class="col-md-6 col-lg-3 mb-5">
+                            <div class="col-md-6 col-lg-3 mb-5">
                                 <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
                                     <div class="card card-product">
                                         <img src="{{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}" class="card-img-top img-fluid" alt="...">
@@ -227,11 +220,11 @@
                                         </div>
                                     </div>
                                 </a>
-                            </div> --}}
+                            </div>
                         @empty
                             Maaf, Data Belum Tersedia!
                         @endforelse
-                    @endif --}}
+                    @endif
                 </div>
             </div>
         </section>

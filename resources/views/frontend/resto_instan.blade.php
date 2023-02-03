@@ -15,6 +15,9 @@
                             <div class="col-md-2"><i class="fas fa-star star-active"></i> 4.7</div>
                             <div class="col-md-2"><button data-bs-toggle="modal" data-bs-target="#jamBuka" class="btn btn-sm btn-primary text-decoration-none fw-bold">Jam Buka</button></div>
                         </div>
+                        <div class="row text-dark">
+                            <div class="col-md-2"><a href="{{ route('fe.review') }}" class="text-decoration-none fw-bold" style="color: #000;">Nilai dan Ulasan</a></div>
+                        </div>
                     </div>
                 </div>
             </div>

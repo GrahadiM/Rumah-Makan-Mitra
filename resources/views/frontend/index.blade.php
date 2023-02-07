@@ -185,8 +185,8 @@
         </div>
     </section>
 
-    <div id="indexPage"></div>
-    {{-- @forelse ($products as $name => $product)
+    {{-- <div id="indexPage"></div> --}}
+    @forelse ($products as $name => $product)
         <!-- Favorite Section-->
         <section class="page-section portfolio" id="{{ Str::slug($name) }}">
             <div class="container">
@@ -210,10 +210,10 @@
                             <div class="col-md-6 col-lg-3 mb-5">
                                 <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
                                     <div class="card card-product">
-                                        <img src="{{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}" class="card-img-top img-fluid" alt="...">
+                                        <img src="{{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}" class="card-img-top img-fluid" style="height:200px;" alt="...">
                                         <div class="card-body text-dark">
                                             <h5 class="card-title">{{ $item->name }}</h5>
-                                            <p class="card-text">{{ $item->body }}</p>
+                                            <p class="card-text">{{ Str::limit($item->body, 100, '...') }}</p>
                                             <div class="text-dark">
                                                 <i class="fas fa-star star-active"></i> 4.7
                                             </div>
@@ -230,7 +230,7 @@
         </section>
     @empty
         Maaf, Data Belum Tersedia!
-    @endforelse --}}
+    @endforelse
 
     @include('layouts.fe.modal.menu')
 

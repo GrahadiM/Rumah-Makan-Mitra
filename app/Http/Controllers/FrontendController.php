@@ -25,8 +25,8 @@ class FrontendController extends Controller
 {
     public function list()
     {
-        $data = Product::all();
-        // $products = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
+        // $data = Product::all();
+        $data = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
         // foreach($products as $name => $product) {
         //     foreach($product as $item) {
         //         $data = $item;

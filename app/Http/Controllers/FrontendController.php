@@ -54,6 +54,7 @@ class FrontendController extends Controller
 
         //     echo '</ul>';
         // }
+        // dd($data['products']);
         return view('frontend.index', $data);
     }
 

@@ -185,8 +185,8 @@
         </div>
     </section>
 
-    {{-- <div id="indexPage"></div> --}}
-    @forelse ($products as $name => $product)
+    <div id="indexPage"></div>
+    {{-- @forelse ($products as $name => $product)
         <!-- Favorite Section-->
         <section class="page-section portfolio" id="{{ Str::slug($name) }}">
             <div class="container">
@@ -204,7 +204,7 @@
                 </div>
                 <!-- Favorite Grid Items-->
                 <div class="row justify-content-center">
-                @if (count($product)>0)
+                    @if (count($product)>0)
                         @forelse ($product as $item)
                             <!-- Favorite Item -->
                             <div class="col-md-6 col-lg-3 mb-5">
@@ -230,7 +230,7 @@
         </section>
     @empty
         Maaf, Data Belum Tersedia!
-    @endforelse
+    @endforelse --}}
 
     @include('layouts.fe.modal.menu')
 

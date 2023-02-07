@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Province;
-use App\Models\Regency;
-use App\Models\District;
-use App\Models\Village;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
@@ -111,8 +107,8 @@ class FrontendController extends Controller
     public function riwayat()
     {
         $data['title'] = 'Riwayat';
-        $data['instan'] = Transaction::with('customer','address')->where('type', 'instan')->latest('id')->get();
-        $data['katering'] = Transaction::with('customer','address')->where('type', 'katering')->latest('id')->get();
+        $data['instan'] = Transaction::with('customer','address')->where('customer_id', Auth::user()->id)->where('type', 'instan')->latest('id')->get();
+        $data['katering'] = Transaction::with('customer','address')->where('customer_id', Auth::user()->id)->where('type', 'katering')->latest('id')->get();
         return view('frontend.riwayat', $data);
     }
 

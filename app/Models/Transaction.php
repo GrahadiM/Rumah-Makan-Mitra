@@ -42,4 +42,9 @@ class Transaction extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
+use Midtrans\Config;
 use App\Models\Address;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
+use App\Helper\SettingHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\UpdatePasswordRequest;
-use App\Models\OrderProduct;
 
 class FrontendController extends Controller
 {
@@ -258,26 +261,50 @@ class FrontendController extends Controller
         return back();
     }
 
+    // public function pay(Request $request, $id)
+    // {
+    //     Config::$serverKey = config('services.midtrans.serverKey');
+    //     Config::$isProduction = config('services.midtrans.isProduction');
+    //     Config::$isSanitized = config('services.midtrans.isSanitized');
+    //     Config::$is3ds = config('services.midtrans.is3ds');
+
+    //     // dd($request->all());
+    //     // $atr = Transaction::with('customer')->where([
+	// 	// 	['customer_id', Auth::user()->id],
+	// 	// 	['status', 'PENDING'],
+    //     //     ['type', $request->type],
+    //     //     ['id', $request->id],
+	// 	// ])->latest('id')->first();
+    //     $atr = Transaction::with('customer')->find($id);
+    //     $atr->total_harga = (int) $request->total_harga;
+    //     $atr->status = 'PROSES';
+    //     $atr->snap_token = $request->snap_token == NULL ? mt_rand(00000, 99999).time() : $request->snap_token;
+    //     $atr->update();
+
+    //     $carts = Cart::with('product')->where('customer_id', Auth::user()->id)->get();
+    //     foreach ($carts as $item) {
+
+    //         $op = new OrderProduct;
+    //         $op->transaction_id = $atr->id;
+    //         $op->product_id = $item->product->id;
+    //         $op->qty = $item->qty == NULL ? 1 : $item->qty;
+    //         $atr->type = $request->type;
+    //         $op->save();
+
+    //         Cart::destroy($item->id);
+    //     }
+
+    //     Alert::success('Silahkan Segera Proses Pembayaran Anda!');
+    //     return redirect()->route('fe.invoice', $atr->id);
+    // }
+
     public function pay(Request $request, $id)
     {
-        Config::$serverKey = config('services.midtrans.serverKey');
-        Config::$isProduction = config('services.midtrans.isProduction');
-        Config::$isSanitized = config('services.midtrans.isSanitized');
-        Config::$is3ds = config('services.midtrans.is3ds');
-
-        // dd($request->all());
-        // $atr = Transaction::with('customer')->where([
-		// 	['customer_id', Auth::user()->id],
-		// 	['status', 'PENDING'],
-        //     ['type', $request->type],
-        //     ['id', $request->id],
-		// ])->latest('id')->first();
         $atr = Transaction::with('customer')->find($id);
         $atr->total_harga = (int) $request->total_harga;
         $atr->status = 'PROSES';
         $atr->snap_token = $request->snap_token == NULL ? mt_rand(00000, 99999).time() : $request->snap_token;
         $atr->update();
-
         $carts = Cart::with('product')->where('customer_id', Auth::user()->id)->get();
         foreach ($carts as $item) {
 
@@ -291,8 +318,79 @@ class FrontendController extends Controller
             Cart::destroy($item->id);
         }
 
-        Alert::success('Silahkan Segera Proses Pembayaran Anda!');
-        return redirect()->route('fe.invoice', $atr->id);
+        $transaction = Transaction::find($id);
+        $orders = $transaction->order_product;
+        $customer = $transaction->customer;
+
+        //Set Your server key
+        Config::$serverKey = SettingHelper::midtrans_api();
+        // Uncomment for production environment
+        // Config::$isProduction = true;
+        Config::$isSanitized = Config::$is3ds = true;
+
+        $transaction_details = array(
+            'order_id' => $transaction->kode_transaksi,
+            'gross_amount' => round($transaction->total_harga),
+        );
+
+        $item_details = [];
+        foreach($orders as $order) {
+            $product = $order->product;
+            $item = array(
+                'id' => $product->id,
+                'price' => $product->price,
+                'quantity' => $order->qty,
+                'name' => $product->name
+            );
+            array_push($item_details, $item);
+        }
+
+        // Optional
+        // $billing_address = array(
+        //     'first_name'    => "Andri",
+        //     'last_name'     => "Litani",
+        //     'address'       => "Mangga 20",
+        //     'city'          => "Jakarta",
+        //     'postal_code'   => "16602",
+        //     'phone'         => "081122334455",
+        //     'country_code'  => 'IDN'
+        // );
+
+        // Optional
+        // $shipping_address = array(
+        //     'first_name'    => "Obet",
+        //     'last_name'     => "Supriadi",
+        //     'address'       => "Manggis 90",
+        //     'city'          => "Jakarta",
+        //     'postal_code'   => "16601",
+        //     'phone'         => "08113366345",
+        //     'country_code'  => 'IDN'
+        // );
+
+        $customer_details = array(
+            'first_name'    => $customer->firstname,
+            'last_name'     => $customer->lastname,
+            'email'         => $customer->email,
+            'phone'         => $customer->phone,
+        );
+
+        // Optional, remove this to display all available payment methods
+        // $enable_payments = array('credit_card','cimb_clicks','mandiri_clickpay','echannel');
+
+        $params = [
+            'transaction_details' => $transaction_details,
+            'item_details' => $item_details,
+            'customer_details' => $customer_details,
+        ];
+
+        try {
+          // Get Snap Payment Page URL
+          $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
+          return redirect($paymentUrl);
+        }
+        catch (Exception $e) {
+            return dd($e->getMessage());
+        }
     }
 
     public function invoice(Request $request, $id)
@@ -304,5 +402,42 @@ class FrontendController extends Controller
         $data['items'] = OrderProduct::where('transaction_id', $data['transaksi']->id)->get();
 
         return view('frontend.invoice', $data);
+    }
+
+    public function midtrans_notify(Request $request)
+    {
+        $transaction = $request->transaction_status;
+        $type = $request->payment_type;
+        $order_id = $request->order_id;
+        $fraud = $request->fraud_status;
+
+        $trx = Transaction::firstWhere('kode_transaksi', $order_id);
+        function success($order_id, $trx){
+            $trx->update(['payment_status' => 2]);
+        }
+
+        if ($transaction == 'capture') {
+            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
+            // if ($type == 'credit_card') {
+            //     if ($fraud == 'challenge') {
+            //         // TODO set payment status in merchant's database to 'Challenge by FDS'
+            //         // TODO merchant should decide whether this transaction is authorized or not in MAP
+            //         echo "Transaction order_id: " . $order_id ." is challenged by FDS";
+            //     } else {
+            //         // TODO set payment status in merchant's database to 'Success'
+            //         echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
+            //     }
+            // }
+            success($order_id, $trx);
+        } else if ($transaction == 'settlement') {
+            // TODO set payment status in merchant's database to 'Settlement'
+            success($order_id, $trx);
+        } else if ($transaction == 'pending') {
+            // TODO set payment status in merchant's database to 'Pending'
+            $trx->update(['payment_status' => 1]);
+        } else if ($transaction == 'expire') {
+            // TODO set payment status in merchant's database to 'expire'
+            $trx->update(['payment_status' => 3]);
+        }
     }
 }

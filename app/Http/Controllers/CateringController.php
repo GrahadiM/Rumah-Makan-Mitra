@@ -16,6 +16,7 @@ class CateringController extends Controller
     public function catering()
     {
         $data['title'] = 'Katering';
+        $data['favorite'] = Product::where('favorite', 'true')->paginate(4);
         $data['products'] = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
         return view('frontend.catering', $data);
     }

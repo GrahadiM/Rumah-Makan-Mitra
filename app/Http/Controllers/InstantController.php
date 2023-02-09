@@ -15,6 +15,7 @@ class InstantController extends Controller
     public function instan()
     {
         $data['title'] = 'Instant Order';
+        $data['favorite'] = Product::where('favorite', 'true')->paginate(4);
         $data['products'] = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
         return view('frontend.instant', $data);
     }

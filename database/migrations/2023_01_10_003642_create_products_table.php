@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('thumbnail');
             $table->bigInteger('price');
             $table->text('body');
+            $table->enum('favorite', ['false', 'true'])->comment('false, true')->default('false');
             $table->timestamps();
         });
     }

@@ -100,90 +100,46 @@
         </div>
     </section>
 
-    <!-- Favorite Section-->
-    <section class="page-section portfolio" id="portfolio">
-        <div class="container">
-            <!-- Favorite Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Makanan Terfavorit</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Favorite Grid Items-->
-            <div class="row justify-content-center">
-                <!-- Favorite Item -->
-                <div class="col-md-6 col-lg-3 mb-5">
-                    <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
-                        <div class="card card-product">
-                            <img src="{{ asset('frontend') }}/assets/img/product/ayam-bakar.jpg"
-                                class="card-img-top img-fluid" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Nasi Ayam Bakar</h5>
-                                <p class="card-text text-dark">Nasi, Sayur Komplit, Sambal Ijo Ayam Bakar</p>
-                                <div class="text-dark">
-                                    <i class="fas fa-star star-active"></i> 4.7
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+    @if (count($favorite)>0)
+        <section class="page-section portfolio" id="portfolio">
+            <div class="container">
+                <!-- Favorite Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Makanan Terfavorit</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
                 </div>
-                <!-- Favorite Item -->
-                <div class="col-md-6 col-lg-3 mb-5">
-                    <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
-                        <div class="card card-product">
-                            <img src="{{ asset('frontend') }}/assets/img/product/ayam-bakar.jpg"
-                                class="card-img-top img-fluid" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Nasi Ayam Bakar</h5>
-                                <p class="card-text text-dark">Nasi, Sayur Komplit, Sambal Ijo Ayam Bakar</p>
-                                <div class="text-dark">
-                                    <i class="fas fa-star star-active"></i> 4.7
+                <!-- Favorite Grid Items-->
+                <div class="row justify-content-center">
+                    @forelse ($favorite as $item)
+                        <!-- Favorite Item -->
+                        <div class="col-md-6 col-lg-3 mb-5">
+                            <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
+                                <div class="card card-product">
+                                    <img src="{{ asset('frontend/assets/img/product') . "/" . $item->thumbnail }}" class="card-img-top img-fluid" style="height:200px;" alt="...">
+                                    <div class="card-body text-dark">
+                                        <h5 class="card-title">{{ $item->name }}</h5>
+                                        <p class="card-text">{{ Str::limit($item->body, 100, '...') }}</p>
+                                        <div class="text-dark">
+                                            <i class="fas fa-star star-active"></i> 4.7
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                <!-- Favorite Item -->
-                <div class="col-md-6 col-lg-3 mb-5">
-                    <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
-                        <div class="card card-product">
-                            <img src="{{ asset('frontend') }}/assets/img/product/ayam-bakar.jpg"
-                                class="card-img-top img-fluid" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Nasi Ayam Bakar</h5>
-                                <p class="card-text text-dark">Nasi, Sayur Komplit, Sambal Ijo Ayam Bakar</p>
-                                <div class="text-dark">
-                                    <i class="fas fa-star star-active"></i> 4.7
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Favorite Item -->
-                <div class="col-md-6 col-lg-3 mb-5">
-                    <a data-bs-toggle="modal" data-bs-target="#cart" class="text-decoration-none">
-                        <div class="card card-product">
-                            <img src="{{ asset('frontend') }}/assets/img/product/ayam-bakar.jpg"
-                                class="card-img-top img-fluid" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Nasi Ayam Bakar</h5>
-                                <p class="card-text text-dark">Nasi, Sayur Komplit, Sambal Ijo Ayam Bakar</p>
-                                <div class="text-dark">
-                                    <i class="fas fa-star star-active"></i> 4.7
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    @empty
+                        Maaf, Data Belum Tersedia!
+                    @endforelse
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     {{-- <div id="indexPage"></div> --}}
     @forelse ($products as $name => $product)

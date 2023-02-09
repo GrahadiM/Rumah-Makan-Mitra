@@ -44,6 +44,7 @@ class FrontendController extends Controller
         $data['title'] = NULL;
         $data['categories'] = Category::all();
         $data['items'] = Product::latest('id')->get();
+        $data['favorite'] = Product::where('favorite', 'true')->paginate(4);
         $data['products'] = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
         // foreach($data['products'] as $name => $product) {
         //     echo '<ul>';
@@ -61,9 +62,10 @@ class FrontendController extends Controller
         return view('frontend.index', $data);
     }
 
-    public function instan($id)
+    public function category($id)
     {
         $data['title'] = 'Instant Order';
+        $data['favorite'] = Product::where('favorite', 'true')->paginate(4);
         $data['products'] = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
         return view('frontend.category', $data);
     }
@@ -304,18 +306,18 @@ class FrontendController extends Controller
         $atr->total_harga = (int) $request->total_harga;
         $atr->status = 'PROSES';
         $atr->snap_token = $request->snap_token == NULL ? mt_rand(00000, 99999).time() : $request->snap_token;
+        $atr->type = $request->type;
         $atr->update();
         $carts = Cart::with('product')->where('customer_id', Auth::user()->id)->get();
-        foreach ($carts as $item) {
+        foreach ($carts as $cart) {
 
             $op = new OrderProduct;
             $op->transaction_id = $atr->id;
-            $op->product_id = $item->product->id;
-            $op->qty = $item->qty == NULL ? 1 : $item->qty;
-            $atr->type = $request->type;
+            $op->product_id = $cart->product->id;
+            $op->qty = $cart->qty == NULL ? 1 : $cart->qty;
             $op->save();
 
-            Cart::destroy($item->id);
+            Cart::destroy($cart->id);
         }
 
         $transaction = Transaction::find($id);

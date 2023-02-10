@@ -99,7 +99,7 @@
                 </div>
                 <div class="row fw-bold mb-5">
                     <div class="col-md-10">
-                        Total Harga
+                        Total
                         <h5>{{ __('Rp.').number_format($total+($total*(10/100)),2,',','.') }}</h5>
                     </div>
                     <div class="col-md-2">

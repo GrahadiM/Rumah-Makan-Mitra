@@ -15,7 +15,7 @@
                         <p class="lead mb-0 mt-5">
                             <span>Rumah Makan Mitra @ <script>document.write(new Date().getFullYear());</script></span>
                             <br>
-                            <a href="http://startbootstrap.com" class="text-decoration-none text-dark">Syarat dan Ketentuan</a>
+                            <a href="{{ url('/') }}" class="text-decoration-none text-dark">Syarat dan Ketentuan</a>
                             <br>
                             <a href="{{ url('/') }}" class="text-decoration-none text-dark">{{ url('/') }}</a>
                         </p>

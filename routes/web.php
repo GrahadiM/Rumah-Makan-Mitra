@@ -52,6 +52,7 @@ Route::middleware(['xss'])->group(function () {
                         Route::put('/update_note/{id}', 'update_note')->name('update_note');
                         Route::put('/pay/{id}', 'pay')->name('pay');
                         Route::get('/invoice/{id}', 'invoice')->name('invoice');
+                        Route::get('/invoices', 'invoices')->name('invoices');
 
                         Route::resource('orders', App\Http\Controllers\OrderController::class)->only(['index', 'show']);
                         Route::post('payments/midtrans-notification', [App\Http\Controllers\PaymentCallbackController::class, 'receive']);
@@ -60,7 +61,7 @@ Route::middleware(['xss'])->group(function () {
             });
         });
     });
-    
+
     Route::get('payments-finish', [App\Http\Controllers\FrontendController::class, 'payments_finish'])->name('payments_finish');
 
     Auth::routes([

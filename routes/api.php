@@ -26,3 +26,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('midtrans-notify', [App\Http\Controllers\FrontendController::class, 'midtrans_notify'])->name('midtrans_notify');
+Route::put('midtrans-pay', [App\Http\Controllers\FrontendController::class, 'midtrans_pays'])->name('midtrans_pays');

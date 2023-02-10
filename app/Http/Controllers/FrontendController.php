@@ -11,6 +11,7 @@ use App\Models\Address;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Transaction;
+use Illuminate\Support\Str;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Helper\SettingHelper;
@@ -412,6 +413,7 @@ class FrontendController extends Controller
 
     public function midtrans_notify(Request $request)
     {
+        // dd($request->all());
         $transaction = $request->transaction_status;
         $order_id = $request->order_id;
         $status_code = $request->status_code;
@@ -424,13 +426,20 @@ class FrontendController extends Controller
         }
 
         $trx = Transaction::firstWhere('kode_transaksi', $order_id);
+        $status_code = $trx->update([
+            'payment_status' => 2,
+            'status' => 'SUCCESS'
+        ]);
 
         if($trx->payment_status == 2) {
             return 'Transaksi sudah dibayar!';
         }
 
         function success($order_id, $trx) {
-            $trx->update(['payment_status' => 2]);
+            $trx->update([
+                'payment_status' => 2,
+                'status' => 'SUCCESS'
+            ]);
             if($trx) {
                 return 'success';
             } else {
@@ -445,15 +454,59 @@ class FrontendController extends Controller
             return success($order_id, $trx);
         } else if ($transaction == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
-            $trx->update(['payment_status' => 1]);
+            $trx->update([
+                'payment_status' => 1,
+                'status' => 'PENDING',
+            ]);
         } else if ($transaction == 'expire') {
             // TODO set payment status in merchant's database to 'expire'
-            $trx->update(['payment_status' => 3]);
+            $trx->update([
+                'payment_status' => 3,
+                'status' => 'CANCEL',
+            ]);
         }
     }
 
-    public function payments_finish() {
-        return dd('Pembayaran sedang diproses');
-        // return view('');
+    public function payments_finish(Request $request) {
+        // return dd('Pembayaran sedang diproses');
+        $data['transaksi'] = Transaction::with('customer', 'order_product')->where([
+			['customer_id', Auth::user()->id],
+            ['kode_transaksi', $request->order_id,],
+            // ['status', Str::upper($request->transaction_status)],
+        ])->first();
+        // dd($data['transaksi']);
+
+        // $data['items'] = $data['transaksi']->order_product;
+        // $data['items'] = OrderProduct::where('transaction_id', $data['transaksi']->id)->get();
+
+        return view('frontend.invoice', $data);
+    }
+
+    public function midtrans_pays(Request $request) {
+        // return dd('Pembayaran sedang diproses');
+        $data['transaksi'] = Transaction::with('customer', 'order_product')->where([
+            ['id', $request->order_id,],
+            // ['kode_transaksi', $request->order_id,],
+            // ['status', Str::upper($request->transaction_status)],
+        ])->first();
+        // dd($data['transaksi']);
+        $data['transaksi']->update([
+            'payment_status' => 2,
+            'status' => 'SUCCESS'
+        ]);
+
+        // $data['items'] = $data['transaksi']->order_product;
+        // $data['items'] = OrderProduct::where('transaction_id', $data['transaksi']->id)->get();
+
+        return back();
+    }
+
+    public function invoices(Request $request) {
+        // return dd('Pembayaran sedang diproses');
+        $data['transaksi'] = Transaction::with('customer', 'order_product')->where([
+            ['id', $request->order_id,],
+        ])->first();
+
+        return view('frontend.invoice', $data);
     }
 }

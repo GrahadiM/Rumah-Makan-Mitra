@@ -38,7 +38,7 @@
                                                     <p class="text-muted">{{ $item->created_at }}</p>
                                                 </div>
                                                 <div class="col-md-3 text-end">
-                                                    @if ($item->status == 'PENDING')
+                                                    {{-- @if ($item->status == 'PENDING')
                                                         <button class="btn btn-sm rounded btn-outline-secondary mb-2">{{ $item->status }}</button>
                                                     @elseif ($item->status == 'PROSES')
                                                         <button class="btn btn-sm rounded btn-outline-warning mb-2">{{ $item->status }}</button>
@@ -46,15 +46,33 @@
                                                         <button class="btn btn-sm rounded btn-outline-success mb-2">{{ $item->status }}</button>
                                                     @else
                                                         <button class="btn btn-sm rounded btn-outline-danger mb-2">{{ $item->status }}</button>
-                                                    @endif
+                                                    @endif --}}
                                                     @if ($item->payment_status == 1)
-                                                        <button class="btn btn-sm rounded btn-outline-secondary">Menunggu Pembayaran</button>
+                                                        <form action="{{ route('midtrans_pays') }}" method="POST">
+                                                            @method('PUT')
+                                                            @csrf
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-warning">Menunggu Pembayaran</button>
+                                                        </form>
                                                     @elseif ($item->payment_status == 2)
-                                                        <button class="btn btn-sm rounded btn-outline-warning">Sudah Dibayar</button>
+                                                        <form action="{{ route('fe.invoices') }}" method="GET">
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-success">Sudah Dibayar</button>
+                                                        </form>
                                                     @elseif ($item->payment_status == 3)
-                                                        <button class="btn btn-sm rounded btn-outline-success">Kadaluarsa</button>
+                                                        <form action="{{ route('midtrans_pays') }}" method="POST">
+                                                            @method('PUT')
+                                                            @csrf
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-danger" disabled>Kadaluarsa</button>
+                                                        </form>
                                                     @else
-                                                        <button class="btn btn-sm rounded btn-outline-danger">Kadaluarsa</button>
+                                                        <form action="{{ route('midtrans_pays') }}" method="POST">
+                                                            @method('PUT')
+                                                            @csrf
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-danger" disabled>Kadaluarsa</button>
+                                                        </form>
                                                     @endif
                                                     {{-- <button class="btn btn-sm rounded btn-outline-primary">Dalam Proses</button> --}}
                                                 </div>
@@ -80,14 +98,41 @@
                                                     <p class="text-muted">{{ $item->created_at }}</p>
                                                 </div>
                                                 <div class="col-md-3 text-end">
-                                                    @if ($item->status == 'PENDING')
+                                                    {{-- @if ($item->status == 'PENDING')
                                                         <button class="btn btn-sm rounded btn-outline-secondary">{{ $item->status }}</button>
                                                     @elseif ($item->status == 'PROSES')
                                                         <button class="btn btn-sm rounded btn-outline-warning">{{ $item->status }}</button>
                                                     @elseif ($item->status == 'SUCCESS')
-                                                        <button class="btn btn-sm rounded btn-outline-succes">{{ $item->status }}</button>
+                                                        <button class="btn btn-sm rounded btn-outline-success">{{ $item->status }}</button>
                                                     @else
                                                         <button class="btn btn-sm rounded btn-outline-danger">{{ $item->status }}</button>
+                                                    @endif --}}
+                                                    @if ($item->payment_status == 1)
+                                                        <form action="{{ route('midtrans_pays') }}" method="POST">
+                                                            @method('PUT')
+                                                            @csrf
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-warning">Menunggu Pembayaran</button>
+                                                        </form>
+                                                    @elseif ($item->payment_status == 2)
+                                                        <form action="{{ route('fe.invoices') }}" method="GET">
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-success">Sudah Dibayar</button>
+                                                        </form>
+                                                    @elseif ($item->payment_status == 3)
+                                                        <form action="{{ route('midtrans_pays') }}" method="POST">
+                                                            @method('PUT')
+                                                            @csrf
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-danger" disabled>Kadaluarsa</button>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{ route('midtrans_pays') }}" method="POST">
+                                                            @method('PUT')
+                                                            @csrf
+                                                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm rounded btn-outline-danger" disabled>Kadaluarsa</button>
+                                                        </form>
                                                     @endif
                                                     {{-- <button class="btn btn-sm rounded btn-outline-primary">Dalam Proses</button> --}}
                                                 </div>

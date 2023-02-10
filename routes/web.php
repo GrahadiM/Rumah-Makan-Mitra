@@ -60,6 +60,8 @@ Route::middleware(['xss'])->group(function () {
             });
         });
     });
+    
+    Route::get('payments-finish', [App\Http\Controllers\FrontendController::class, 'payments_finish'])->name('payments_finish');
 
     Auth::routes([
         'login'    => true,

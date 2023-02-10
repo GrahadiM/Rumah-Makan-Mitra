@@ -25,4 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('midtrans-notify', [App\Http\Controllers\FrontendController::class, 'midtrans_notify']);
+Route::post('midtrans-notify', [App\Http\Controllers\FrontendController::class, 'midtrans_notify'])->name('midtrans_notify');

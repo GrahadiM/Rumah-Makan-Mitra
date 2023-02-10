@@ -329,6 +329,7 @@ class FrontendController extends Controller
         // Uncomment for production environment
         // Config::$isProduction = true;
         Config::$isSanitized = Config::$is3ds = true;
+        Config::$overrideNotifUrl = route('midtrans_notify');
 
         $transaction_details = array(
             'order_id' => $transaction->kode_transaksi,
@@ -340,7 +341,7 @@ class FrontendController extends Controller
             $product = $order->product;
             $item = array(
                 'id' => $product->id,
-                'price' => $product->price,
+                'price' => $product->price+$product->price*(10/100),
                 'quantity' => $order->qty,
                 'name' => $product->name
             );
@@ -383,6 +384,9 @@ class FrontendController extends Controller
             'transaction_details' => $transaction_details,
             'item_details' => $item_details,
             'customer_details' => $customer_details,
+            'callbacks' => [
+                'finish' => route('payments_finish')
+            ]
         ];
 
         try {
@@ -409,31 +413,36 @@ class FrontendController extends Controller
     public function midtrans_notify(Request $request)
     {
         $transaction = $request->transaction_status;
-        $type = $request->payment_type;
         $order_id = $request->order_id;
-        $fraud = $request->fraud_status;
+        $status_code = $request->status_code;
+        $gross_amount = $request->gross_amount;
+        $serverkey = SettingHelper::midtrans_api();
+        $generate_signature = hash('sha512',$order_id.$status_code.$gross_amount.$serverkey);
+        $signature = $request->signature_key;
+        if($generate_signature != $signature) {
+            return 'Request Invalid';
+        }
 
         $trx = Transaction::firstWhere('kode_transaksi', $order_id);
-        function success($order_id, $trx){
+
+        if($trx->payment_status == 2) {
+            return 'Transaksi sudah dibayar!';
+        }
+
+        function success($order_id, $trx) {
             $trx->update(['payment_status' => 2]);
+            if($trx) {
+                return 'success';
+            } else {
+                return 'failed/error';
+            }
         }
 
         if ($transaction == 'capture') {
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            // if ($type == 'credit_card') {
-            //     if ($fraud == 'challenge') {
-            //         // TODO set payment status in merchant's database to 'Challenge by FDS'
-            //         // TODO merchant should decide whether this transaction is authorized or not in MAP
-            //         echo "Transaction order_id: " . $order_id ." is challenged by FDS";
-            //     } else {
-            //         // TODO set payment status in merchant's database to 'Success'
-            //         echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
-            //     }
-            // }
-            success($order_id, $trx);
+            return success($order_id, $trx);
         } else if ($transaction == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
-            success($order_id, $trx);
+            return success($order_id, $trx);
         } else if ($transaction == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
             $trx->update(['payment_status' => 1]);
@@ -441,5 +450,10 @@ class FrontendController extends Controller
             // TODO set payment status in merchant's database to 'expire'
             $trx->update(['payment_status' => 3]);
         }
+    }
+
+    public function payments_finish() {
+        return dd('Pembayaran sedang diproses');
+        // return view('');
     }
 }

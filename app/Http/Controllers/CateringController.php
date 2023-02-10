@@ -74,7 +74,7 @@ class CateringController extends Controller
 			['type', $request->type],
 		])->first();
 
-		$tgl_pesanan = $request->tgl_pesanan == null ? Carbon::now()->addDay() : $request->tgl_pesanan;
+		$tgl_pesanan = $request->tgl_pesanan == NULL ? Carbon::now()->addDay() : $request->tgl_pesanan;
 		$new = false;
 		if (!$atr) {
 			$atr = new Transaction();
@@ -101,27 +101,9 @@ class CateringController extends Controller
         $atr = Transaction::with('customer')->where([
 			['customer_id', Auth::user()->id],
 			['status', 'PENDING'],
-			['type', $request->type],
-			['address_id', $request->address_id],
 		])->first();
 
-		$tgl_pesanan = $request->tgl_pesanan == null ? Carbon::now()->addDay() : $request->tgl_pesanan;
-		$new = false;
-		if (!$atr) {
-			$atr = new Transaction();
-			$new = true;
-		}
-
-        $atr->total_harga = $request->total_harga;
-        $atr->address_id = $request->address_id;
-        if ($new) {
-            $atr->kode_transaksi = 'TRX-' . mt_rand(00000, 99999);
-            $atr->customer_id = Auth::user()->id;
-            $atr->type = $request->type;
-            $atr->tgl_pesanan = $tgl_pesanan;
-        } else {
-            $atr->tgl_pesanan = $tgl_pesanan;
-        }
+        $atr->tgl_pesanan = $request->tgl_pesanan;
         $atr->update();
 
         Alert::success('Data Berhasil Diubah');

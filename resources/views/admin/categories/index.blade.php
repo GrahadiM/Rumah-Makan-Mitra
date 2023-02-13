@@ -15,9 +15,9 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ trans('menu.category.title') }}</h3>
-            <div class="card-tools">
+            {{-- <div class="card-tools">
                 <a href="{{ route('admin.categories.create') }}" class="btn btn-success btn-sm">{{ trans('global.add')." ".trans('menu.category.title') }}</a>
-            </div>
+            </div> --}}
         </div>
         <!-- /.card-header -->
         <div class="card-body">

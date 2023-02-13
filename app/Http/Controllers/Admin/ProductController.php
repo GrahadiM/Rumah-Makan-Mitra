@@ -50,7 +50,7 @@ class ProductController extends Controller
 
         $dt = new Product;
         $dt->category_id = $request->category_id;
-        $dt->name = strtoupper($request->name);
+        $dt->name = Str::ucfirst($request->name);
         $dt->price = $request->price;
         $dt->body = $request->body;
         $dt->created_at = now();
@@ -109,7 +109,7 @@ class ProductController extends Controller
 
         $dt = Product::find($id);
         $dt->category_id = $request->category_id;
-        $dt->name = strtoupper($request->name);
+        $dt->name = Str::ucfirst($request->name);
         $dt->price = $request->price;
         $dt->body = $request->body;
         $dt->updated_at = now();

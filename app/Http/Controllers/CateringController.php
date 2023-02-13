@@ -98,6 +98,7 @@ class CateringController extends Controller
 
     public function update_catering(Request $request)
     {
+        dd($request->all());
         $atr = Transaction::with('customer')->where([
 			['customer_id', Auth::user()->id],
 			['status', 'PENDING'],

@@ -55,13 +55,13 @@ Route::middleware(['xss'])->group(function () {
                         Route::get('/invoices', 'invoices')->name('invoices');
 
                         Route::resource('orders', App\Http\Controllers\OrderController::class)->only(['index', 'show']);
-                        Route::post('payments/midtrans-notification', [App\Http\Controllers\PaymentCallbackController::class, 'receive']);
                     });
                 });
             });
         });
     });
 
+    Route::post('payments/midtrans-notification', [App\Http\Controllers\PaymentCallbackController::class, 'receive']);
     Route::get('payments-finish', [App\Http\Controllers\FrontendController::class, 'payments_finish'])->name('payments_finish');
 
     Auth::routes([

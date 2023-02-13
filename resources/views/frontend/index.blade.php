@@ -141,7 +141,7 @@
         </section>
     @endif
 
-    {{-- <div id="indexPage"></div> --}}
+    <div id="indexPage"></div>
     @forelse ($products as $name => $product)
         <!-- Favorite Section-->
         <section class="page-section portfolio" id="{{ Str::slug($name) }}">
@@ -161,6 +161,7 @@
                 <!-- Favorite Grid Items-->
                 <div class="row justify-content-center">
                     @if (count($product)>0)
+                        {{-- <div id="product"></div> --}}
                         @forelse ($product as $item)
                             <!-- Favorite Item -->
                             <div class="col-md-6 col-lg-3 mb-5">

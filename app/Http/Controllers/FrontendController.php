@@ -26,7 +26,8 @@ class FrontendController extends Controller
     public function list()
     {
         // $data = Product::all();
-        $data = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
+        // $data = Product::with('category')->orderBy('category_id')->get()->groupBy(function($data) { return $data->category->name; });
+        $data = Category::with('product')->orderBy('id')->get()->groupBy(function($data) { return $data->category->name; });
         // foreach($products as $name => $product) {
         //     foreach($product as $item) {
         //         $data = $item;
@@ -393,6 +394,9 @@ class FrontendController extends Controller
         try {
           // Get Snap Payment Page URL
           $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
+          $atr->link_pembayaran = $paymentUrl;
+          $atr->update();
+        //   dd($paymentUrl);
           return redirect($paymentUrl);
         }
         catch (Exception $e) {

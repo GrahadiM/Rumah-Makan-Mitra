@@ -30,6 +30,17 @@ class SettingHelper
 			['status', 'PENDING'],
 			['type', 'katering'],
 		])->latest('id')->first();
+
+        // $today = $day->tgl_pesanan;
+        // $dd = Carbon::parse($today)->format('d');
+        // $mm = Carbon::parse($today)->format('M');
+        // $yyyy = Carbon::parse($today)->format('Y');
+        // $hh = Carbon::parse($today)->format('H');
+        // $m = Carbon::parse($today)->format('i');
+
+        // $tgl_pesanan = $yyyy.'-'.$mm.'-'.$dd.'T'.$hh.':'.$m;
+        // return $tgl_pesanan;
+
         // $day = \App\Models\Transaction::where('customer_id', Auth()->user()->id)->where('status', 'Pending')->where('tgl_penerimaan', '=', NULL)->latest('id')->get()->first();
         return $day;
     }

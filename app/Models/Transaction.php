@@ -23,10 +23,10 @@ class Transaction extends Model
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->translatedFormat('l, d/m/Y H:i');
     }
 
-    public function getTglPesananAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->translatedFormat('l, d/m/Y H:i');
-    }
+    // public function getTglPesananAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->translatedFormat('l, d/m/Y H:i');
+    // }
 
     public function customer()
     {

@@ -117,7 +117,7 @@
         </section>
 
         @include('layouts.fe.modal.menu')
-        @include('layouts.fe.modal.day')
+        @include('layouts.fe.modal.dayEdit')
         @include('layouts.fe.modal.address')
 
 @endsection

@@ -30,6 +30,11 @@ class CateringController extends Controller
 
     public function cart_catering()
     {
+        // $data['day'] = \App\Models\Transaction::with('customer')->where([
+		// 	['customer_id', Auth::user()->id],
+		// 	['type', 'katering'],
+		// 	['status', 'PENDING'],
+		// ])->first();
         $data['title'] = 'Keranjang Katering';
         $data['items'] = Cart::with('product', 'customer')->where([
 			['customer_id', Auth::user()->id],
@@ -83,7 +88,7 @@ class CateringController extends Controller
 
         $atr->address_id = $data->id;
         if ($new) {
-            $atr->kode_transaksi = 'TRX-' . mt_rand(00000, 99999);
+            $atr->kode_transaksi = 'TRX-' . mt_rand(00000, 99999).time();
             $atr->customer_id = Auth::user()->id;
             $atr->type = $request->type;
             $atr->tgl_pesanan = $tgl_pesanan;
@@ -98,9 +103,10 @@ class CateringController extends Controller
 
     public function update_catering(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $atr = Transaction::with('customer')->where([
 			['customer_id', Auth::user()->id],
+			['type', 'katering'],
 			['status', 'PENDING'],
 		])->first();
 

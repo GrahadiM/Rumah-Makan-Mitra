@@ -45,13 +45,21 @@
                 {{ $dt->status }}
             </div>
             <div class="form-group">
-                <strong>Tanggal di Buat : </strong>
-                {{ $dt->created_at }}
+                <strong>Tanggal Pengantaran Pesanan : </strong>
+                @if ($dt->status == 'katering')
+                    {{ $dt->tgl_pesanan }}
+                @else
+                    {{ $dt->created_at }}
+                @endif
             </div>
             <div class="form-group">
+                <strong>Tanggal Pesanan di Buat : </strong>
+                {{ $dt->created_at }}
+            </div>
+            {{-- <div class="form-group">
                 <strong>Tanggal di Ubah : </strong>
                 {{ $dt->updated_at }}
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

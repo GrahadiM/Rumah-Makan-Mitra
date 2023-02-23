@@ -18,7 +18,7 @@
 
                         <input type="hidden" name="type" value="katering">
                         <div class="col-11">
-                            <input type="datetime-local" name="tgl_pesanan" id="datetime-local" class="form-control datetimepicker" min="today_min" value="{{ \Setting::getDay() == NULL ? 'today_min' : \Setting::getDay()->tgl_pesanan }}">
+                            <input type="datetime-local" name="tgl_pesanan" id="datetime-local" class="form-control datetimepicker" min="today_min" value="{{ \Setting::getDay() == NULL ? 'today_min' : $tgl_pesanan }}">
                         </div>
                         <!-- <span class="validity"></span> -->
                         <button type="submit" class="btn btn-outline-primary col-1"><i class="fas fa-check"></i></button>
@@ -65,7 +65,7 @@
             }
 
             today_min = `${yyyy}-${mm}-${dd}T00:00`;
-            value = {$day->tgl_pesanan};
+            value = {$tgl_pesanan};
 
             //or Year-Month-Day
             document.getElementById("datetime-local").setAttribute("min", today_min);

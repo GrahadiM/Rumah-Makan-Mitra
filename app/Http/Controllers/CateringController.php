@@ -30,11 +30,20 @@ class CateringController extends Controller
 
     public function cart_catering()
     {
-        // $data['day'] = \App\Models\Transaction::with('customer')->where([
-		// 	['customer_id', Auth::user()->id],
-		// 	['type', 'katering'],
-		// 	['status', 'PENDING'],
-		// ])->first();
+        $day = \App\Models\Transaction::with('customer')->where([
+			['customer_id', Auth::user()->id],
+			['status', 'PENDING'],
+			['type', 'katering'],
+		])->latest('id')->first();
+        $today = $day->tgl_pesanan;
+        $dd = Carbon::parse($today)->format('d');
+        $mm = Carbon::parse($today)->format('m');
+        $yyyy = Carbon::parse($today)->format('Y');
+        $hh = Carbon::parse($today)->format('H');
+        $m = Carbon::parse($today)->format('i');
+
+        $data['tgl_pesanan'] = $yyyy.'-'.$mm.'-'.$dd.'T'.$hh.':'.$m;
+        // return $tgl_pesanan;
         $data['title'] = 'Keranjang Katering';
         $data['items'] = Cart::with('product', 'customer')->where([
 			['customer_id', Auth::user()->id],

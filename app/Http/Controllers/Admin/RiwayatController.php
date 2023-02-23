@@ -27,7 +27,7 @@ class RiwayatController extends Controller
         } elseif ($request->year) {
             $data['data'] = Transaction::with('customer')->where('YEAR(tgl_penjemputan)', $year )->latest('id')->get();
         } else {
-            $data['data'] = Transaction::with('customer')->latest('id')->get();
+            $data['data'] = Transaction::with('customer')->where('status', 'SUCCESS')->latest('id')->get();
         }
 
         $data['total'] = 0;

@@ -68,12 +68,6 @@ class OrderProductController extends Controller
         return view('admin.order_products.index', $data);
     }
 
-    public function clothes_detail(Request $request ,$id)
-    {
-        $data['data'] = OrderProduct::with('transaction')->where('transaction_id', $id)->get();
-        return view('admin.order_products.index',$data);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

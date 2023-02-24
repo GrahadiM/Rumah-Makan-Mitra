@@ -30,12 +30,12 @@ class CateringController extends Controller
 
     public function cart_catering()
     {
-        $day = \App\Models\Transaction::with('customer')->where([
+        $data['day'] = \App\Models\Transaction::with('customer')->where([
 			['customer_id', Auth::user()->id],
 			['status', 'PENDING'],
 			['type', 'katering'],
 		])->latest('id')->first();
-        $today = $day->tgl_pesanan;
+        $today = $data['day']->tgl_pesanan;
         $dd = Carbon::parse($today)->format('d');
         $mm = Carbon::parse($today)->format('m');
         $yyyy = Carbon::parse($today)->format('Y');

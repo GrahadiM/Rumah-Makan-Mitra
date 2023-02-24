@@ -32,7 +32,7 @@
                 <tbody>
                     @forelse ($data as $key => $dt)
                     <tr>
-                        <td>{{ $dt->name }}</td>
+                        <td>{{ $dt->product->name }}</td>
                         <td>{{ $dt->qty }}</td>
                     </tr>
                     @empty

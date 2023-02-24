@@ -49,26 +49,26 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item {{ Request::is('admin/transactions*') || Request::is('admin/clothes*') || Request::is('admin/status*') || Request::is('admin/riwayat*')  ? 'menu-is-opening menu-open' : '' }}">
+                        <li class="nav-item {{ Request::is('admin/transactions*') || Request::is('admin/order_products*') || Request::is('admin/status*') || Request::is('admin/riwayat*')  ? 'menu-is-opening menu-open' : '' }}">
                             <a href="#" class="nav-link {{ Request::is('admin/home*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>{{ __('Menu Transaksi') }} <i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.transactions.index') }}" class="nav-link {{ Request::is('admin/transactions*') || Request::is('admin/clothes*') || Request::is('admin/status*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.transactions.index') }}" class="nav-link {{ Request::is('admin/transactions*') || Request::is('admin/order_products*') || Request::is('admin/status*') ? 'active' : '' }}">
                                         <i class="fas fa-angle-right nav-icon"></i>
                                         <p>{{ __('Semua Transaksi') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.transactions_instant.index') }}" class="nav-link {{ Request::is('admin/transactions_instant*') || Request::is('admin/clothes*') || Request::is('admin/status*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.transactions_instant.index') }}" class="nav-link {{ Request::is('admin/transactions_instant*') || Request::is('admin/status*') ? 'active' : '' }}">
                                         <i class="fas fa-angle-right nav-icon"></i>
                                         <p>{{ __('Transaksi Instant') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.transactions_catering.index') }}" class="nav-link {{ Request::is('admin/transactions_catering*') || Request::is('admin/clothes*') || Request::is('admin/status*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.transactions_catering.index') }}" class="nav-link {{ Request::is('admin/transactions_catering*') || Request::is('admin/status*') ? 'active' : '' }}">
                                         <i class="fas fa-angle-right nav-icon"></i>
                                         <p>{{ __('Transaksi Katering') }}</p>
                                     </a>
